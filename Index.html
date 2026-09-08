@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    HardwareBhav.in | Hardware Price Comparison
+</title>
+
+
+<style>
+
+/* =========================
+   BASIC
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+
+body{
+    background:#f5f7fa;
+    color:#222;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#fff;
+    padding:15px 5%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+
+.logo span{
+    color:#087f5b;
+}
+
+
+.header-btn,
+.near-btn{
+    border:0;
+    padding:11px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+
+.header-btn{
+    background:#087f5b;
+    color:#fff;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    background:
+        linear-gradient(
+            135deg,
+            #087f5b,
+            #20a878
+        );
+
+    color:#fff;
+    text-align:center;
+    padding:55px 20px;
+}
+
+
+.hero h1{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+
+.hero p{
+    margin-bottom:25px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box{
+    max-width:700px;
+    margin:auto;
+    display:flex;
+    background:#fff;
+    padding:6px;
+    border-radius:10px;
+}
+
+
+.search-box input{
+    flex:1;
+    border:0;
+    outline:0;
+    padding:14px;
+    font-size:16px;
+}
+
+
+.search-box button{
+    border:0;
+    background:#087f5b;
+    color:#fff;
+    padding:0 22px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+    max-width:1100px;
+    margin:25px auto;
+    padding:0 20px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+
+.controls select{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    background:#fff;
+    min-width:180px;
+}
+
+
+.near-btn{
+    background:#222;
+    color:#fff;
+}
+
+
+.near-btn.active{
+    background:#087f5b;
+}
+
+
+/* =========================
+   LOCATION STATUS
+========================= */
+
+.location-status{
+    max-width:1100px;
+    margin:0 auto 15px;
+    padding:0 20px;
+    color:#555;
+    font-size:14px;
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:0 20px 50px;
+}
+
+
+.section-title{
+    margin:20px 0;
+    font-size:25px;
+}
+
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(280px,1fr)
+        );
+
+    gap:20px;
+}
+
+
+.product-card{
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:
+        0 3px 15px rgba(0,0,0,.08);
+}
+
+
+.product-name{
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+
+.product-meta{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+
+.badge{
+    background:#eef7f3;
+    color:#087f5b;
+    padding:5px 9px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   LOWEST PRICE
+========================= */
+
+.lowest{
+    background:#e7f8ef;
+    color:#087f5b;
+    padding:10px;
+    border-radius:8px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+
+.unit-text{
+    font-size:13px;
+    color:#777;
+    font-weight:normal;
+}
+
+
+/* =========================
+   SHOP
+========================= */
+
+.shop{
+    border-top:1px solid #eee;
+    padding:13px 0;
+}
+
+
+.shop-name{
+    font-weight:bold;
+    font-size:17px;
+}
+
+
+.shop-info{
+    color:#666;
+    margin-top:5px;
+    font-size:14px;
+}
+
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:7px;
+}
+
+
+/* =========================
+   DISTANCE
+========================= */
+
+.distance{
+    display:inline-block;
+    margin-top:7px;
+    padding:5px 8px;
+    background:#f0f0f0;
+    border-radius:5px;
+    font-size:13px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.call-btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:8px 13px;
+    background:#087f5b;
+    color:#fff;
+    text-decoration:none;
+    border-radius:6px;
+    font-size:14px;
+}
+
+
+/* =========================
+   NO DATA / LOADING
+========================= */
+
+.no-data,
+.loading{
+    text-align:center;
+    padding:50px 20px;
+    background:#fff;
+    border-radius:12px;
+    color:#777;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#20252b;
+    color:#fff;
+    text-align:center;
+    padding:25px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .hero h1{
+        font-size:28px;
+    }
+
+
+    .search-box{
+        flex-direction:column;
+        gap:6px;
+    }
+
+
+    .search-box button{
+        padding:13px;
+    }
+
+
+    header{
+        padding:12px 15px;
+    }
+
+
+    .logo{
+        font-size:20px;
+    }
+
+
+    .header-btn{
+        padding:9px 12px;
+        font-size:12px;
+    }
+
+
+    .controls{
+        flex-direction:column;
+    }
+
+
+    .controls select,
+    .near-btn{
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        Hardware<span>Bhav.in</span>
+
+    </div>
+
+
+    <button
+        class="header-btn"
+        onclick="registerShop()"
+    >
+
+        🏪 Register Shop
+
+    </button>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <h1>
+        Find Hardware at Best Price
+    </h1>
+
+
+    <p>
+        Compare prices from nearby hardware shops
+    </p>
+
+
+    <div class="search-box">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Search Cement, TMT, Pipe, Paint..."
+            oninput="showProducts()"
+        >
+
+
+        <button
+            onclick="showProducts()"
+        >
+
+            🔍 Search
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FILTERS
+========================= -->
+
+<div class="controls">
+
+
+    <select
+        id="cityFilter"
+        onchange="showProducts()"
+    >
+
+        <option value="all">
+            All Cities
+        </option>
+
+    </select>
+
+
+    <select
+        id="categoryFilter"
+        onchange="showProducts()"
+    >
+
+        <option value="all">
+            All Categories
+        </option>
+
+    </select>
+
+
+    <select
+        id="sortFilter"
+        onchange="showProducts()"
+    >
+
+        <option value="low">
+            Lowest Price First
+        </option>
+
+
+        <option value="high">
+            Highest Price First
+        </option>
+
+
+        <option value="name">
+            Product Name
+        </option>
+
+    </select>
+
+
+    <button
+        id="nearBtn"
+        class="near-btn"
+        onclick="findNearMe()"
+    >
+
+        📍 Near Me
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     LOCATION
+========================= -->
+
+<div
+    id="locationStatus"
+    class="location-status"
+>
+
+    📍 Near Me is currently off
+
+</div>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+    <h2 class="section-title">
+
+        📦 Hardware Prices
+
+    </h2>
+
+
+    <div id="productsContainer">
+
+        <div class="loading">
+
+            Loading prices...
+
+        </div>
+
+    </div>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+
+        © 2026 HardwareBhav.in
+
+    </p>
+
+
+    <p style="margin-top:8px;">
+
+        Compare hardware prices.
+        Find the best deal.
+
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* =========================
+   API
+========================= */
+
+const API_URL = "https://hardwarebhav-backend-uqj7.onrender.com";
+
+
+let shops = [];
+
+let products = [];
+
+
+let userLatitude = null;
+
+let userLongitude = null;
+
+
+let nearMeActive = false;
+
+
+  /* =========================
+   LOAD SHOPS
+========================= */
+
+async function loadShops(){
+
+    try{
+
+        const response =
+            await fetch(API_URL + "/api/shops");
+
+
+        const data =
+            await response.json();
+
+
+        console.log("API DATA:", data);
+
+
+        if(!response.ok){
+
+            throw new Error("Server error");
+
+        }
+
+
+        shops =
+            data.shops || [];
+
+
+        createProducts();
+
+        createCityFilter();
+
+        createCategoryFilter();
+
+        showProducts();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "LOAD ERROR:",
+            error
+        );
+
+
+        document.getElementById(
+            "productsContainer"
+        ).innerHTML = `
+
+            <div class="no-data">
+
+                <h3>
+                    ⚠️ Unable to load prices
+                </h3>
+
+
+                <p style="margin-top:10px;">
+
+                    Make sure backend server
+                    is running.
+
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================
+   CREATE PRODUCTS
+========================= */
+
+function createProducts(){
+
+    products = [];
+
+
+    shops.forEach(shop => {
+
+        if(!Array.isArray(shop.products)){
+
+            return;
+
+        }
+
+
+        shop.products.forEach(product => {
+
+            if(!product.name){
+
+                return;
+
+            }
+
+
+            products.push({
+
+                name:
+                    String(product.name),
+
+
+                price:
+                    Number(product.price) || 0,
+
+
+                category:
+                    product.category || "Other",
+
+
+                unit:
+                    product.unit || "Piece",
+
+
+                shopName:
+                    shop.shopName ||
+                    "Hardware Shop",
+
+
+                city:
+                    shop.city ||
+                    "Unknown",
+
+
+                mobile:
+                    shop.mobile ||
+                    "",
+
+
+                address:
+                    shop.address ||
+                    "",
+
+
+                latitude:
+                    Number(shop.latitude),
+
+
+                longitude:
+                    Number(shop.longitude)
+
+            });
+
+        });
+
+    });
+
+
+    console.log(
+        "PRODUCTS:",
+        products
+    );
+
+}
+
+
+/* =========================
+   CITY FILTER
+========================= */
+
+function createCityFilter(){
+
+    const filter =
+        document.getElementById(
+            "cityFilter"
+        );
+
+
+    const cities = [];
+
+
+    shops.forEach(shop => {
+
+        if(shop.city){
+
+            const city =
+                shop.city.trim();
+
+
+            if(
+                city &&
+                !cities.some(
+                    x =>
+                    x.toLowerCase() ===
+                    city.toLowerCase()
+                )
+            ){
+
+                cities.push(city);
+
+            }
+
+        }
+
+    });
+
+
+    cities.sort();
+
+
+    filter.innerHTML = `
+
+        <option value="all">
+            All Cities
+        </option>
+
+    `;
+
+
+    cities.forEach(city => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            city;
+
+
+        option.textContent =
+            city;
+
+
+        filter.appendChild(
+            option
+        );
+
+    });
+
+}
+
+
+/* =========================
+   CATEGORY FILTER
+========================= */
+
+function createCategoryFilter(){
+
+    const filter =
+        document.getElementById(
+            "categoryFilter"
+        );
+
+
+    const categories = [];
+
+
+    products.forEach(product => {
+
+        const category =
+            product.category ||
+            "Other";
+
+
+        if(
+            !categories.some(
+                x =>
+                x.toLowerCase() ===
+                category.toLowerCase()
+            )
+        ){
+
+            categories.push(
+                category
+            );
+
+        }
+
+    });
+
+
+    categories.sort();
+
+
+    filter.innerHTML = `
+
+        <option value="all">
+            All Categories
+        </option>
+
+    `;
+
+
+    categories.forEach(category => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            category;
+
+
+        option.textContent =
+            category;
+
+
+        filter.appendChild(
+            option
+        );
+
+    });
+
+}
+
+
+/* =========================
+   NEAR ME
+========================= */
+
+function findNearMe(){
+
+    if(!navigator.geolocation){
+
+        alert(
+            "Aapke browser mein location support nahi hai."
+        );
+
+        return;
+
+    }
+
+
+    const status =
+        document.getElementById(
+            "locationStatus"
+        );
+
+
+    const button =
+        document.getElementById(
+            "nearBtn"
+        );
+
+
+    status.textContent =
+        "📍 Location detect ho rahi hai...";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            userLatitude =
+                position.coords.latitude;
+
+
+            userLongitude =
+                position.coords.longitude;
+
+
+            nearMeActive = true;
+
+
+            button.classList.add(
+                "active"
+            );
+
+
+            button.textContent =
+                "📍 Near Me ON";
+
+
+            status.textContent =
+                "📍 Nearby shops distance ke hisaab se dikh rahe hain.";
+
+
+            showProducts();
+
+        },
+
+
+        function(error){
+
+            console.error(error);
+
+
+            status.textContent =
+                "⚠️ Location permission nahi mili.";
+
+
+            alert(
+                "Location permission Allow karein."
+            );
+
+        },
+
+
+        {
+
+            enableHighAccuracy:true,
+
+            timeout:10000,
+
+            maximumAge:60000
+
+        }
+
+    );
+
+}
+
+
+/* =========================
+   DISTANCE CALCULATION
+========================= */
+
+function calculateDistance(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+){
+
+    if(
+        !Number.isFinite(lat1) ||
+        !Number.isFinite(lon1) ||
+        !Number.isFinite(lat2) ||
+        !Number.isFinite(lon2)
+    ){
+
+        return null;
+
+    }
+
+
+    const R = 6371;
+
+
+    const dLat =
+        (lat2 - lat1) *
+        Math.PI / 180;
+
+
+    const dLon =
+        (lon2 - lon1) *
+        Math.PI / 180;
+
+
+    const a =
+        Math.sin(dLat / 2) *
+        Math.sin(dLat / 2) +
+
+        Math.cos(
+            lat1 * Math.PI / 180
+        ) *
+
+        Math.cos(
+            lat2 * Math.PI / 180
+        ) *
+
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+
+    const c =
+        2 *
+        Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+
+
+    return R * c;
+
+}
+
+
+/* =========================
+   SHOW PRODUCTS
+========================= */
+
+function showProducts(){
+
+    const search =
+        document
+        .getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const city =
+        document
+        .getElementById(
+            "cityFilter"
+        )
+        .value;
+
+
+    const category =
+        document
+        .getElementById(
+            "categoryFilter"
+        )
+        .value;
+
+
+    const sort =
+        document
+        .getElementById(
+            "sortFilter"
+        )
+        .value;
+
+
+    let filtered =
+        products.filter(product => {
+
+            const productName =
+                product.name
+                .toLowerCase();
+
+
+            const matchesSearch =
+                productName.includes(
+                    search
+                );
+
+
+            const matchesCity =
+                city === "all" ||
+                product.city === city;
+
+
+            const matchesCategory =
+                category === "all" ||
+                product.category === category;
+
+
+            return (
+                matchesSearch &&
+                matchesCity &&
+                matchesCategory
+            );
+
+        });
+
+
+    /* =========================
+       DISTANCE
+    ========================= */
+
+    filtered.forEach(product => {
+
+        if(nearMeActive){
+
+            product.distance =
+                calculateDistance(
+
+                    userLatitude,
+                    userLongitude,
+
+                    product.latitude,
+                    product.longitude
+
+                );
+
+        }
+
+        else{
+
+            product.distance =
+                null;
+
+        }
+
+    });
+
+
+    /* =========================
+       SORTING
+    ========================= */
+
+    if(nearMeActive){
+
+        filtered.sort((a,b) => {
+
+            if(a.distance === null){
+
+                return 1;
+
+            }
+
+
+            if(b.distance === null){
+
+                return -1;
+
+            }
+
+
+            return (
+                a.distance -
+                b.distance
+            );
+
+        });
+
+    }
+
+
+    else if(sort === "low"){
+
+        filtered.sort(
+            (a,b) =>
+            a.price - b.price
+        );
+
+    }
+
+
+    else if(sort === "high"){
+
+        filtered.sort(
+            (a,b) =>
+            b.price - a.price
+        );
+
+    }
+
+
+    else if(sort === "name"){
+
+        filtered.sort(
+            (a,b) =>
+            a.name.localeCompare(
+                b.name
+            )
+        );
+
+    }
+
+
+    renderProducts(
+        filtered
+    );
+
+}
+  /* =========================
+   RENDER PRODUCTS
+========================= */
+
+function renderProducts(list){
+
+    const container =
+        document.getElementById(
+            "productsContainer"
+        );
+
+
+    if(list.length === 0){
+
+        container.innerHTML = `
+
+            <div class="no-data">
+
+                <h3>
+                    🔎 No products found
+                </h3>
+
+                <p style="margin-top:10px;">
+
+                    Try another product or city.
+
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* =========================
+       GROUP PRODUCTS
+    ========================= */
+
+    const groups = {};
+
+
+    list.forEach(product => {
+
+        const key =
+            product.name
+            .trim()
+            .toLowerCase();
+
+
+        if(!groups[key]){
+
+            groups[key] = [];
+
+        }
+
+
+        groups[key].push(product);
+
+    });
+
+
+    let html =
+        '<div class="product-grid">';
+
+
+    /* =========================
+       EACH PRODUCT
+    ========================= */
+
+    Object.keys(groups).forEach(key => {
+
+        const items =
+            groups[key];
+
+
+        /* =========================
+           LOWEST PRICE
+        ========================= */
+
+        const validPrices =
+            items
+            .map(item =>
+                Number(item.price)
+            )
+            .filter(price =>
+                price > 0
+            );
+
+
+        const lowest =
+            validPrices.length > 0
+            ? Math.min(...validPrices)
+            : 0;
+
+
+        /* =========================
+           PRICE SORT
+        ========================= */
+
+        items.sort((a,b) => {
+
+            const priceA =
+                Number(a.price) || 0;
+
+            const priceB =
+                Number(b.price) || 0;
+
+
+            if(priceA <= 0){
+
+                return 1;
+
+            }
+
+
+            if(priceB <= 0){
+
+                return -1;
+
+            }
+
+
+            return priceA - priceB;
+
+        });
+
+
+        const first =
+            items[0];
+
+
+        html += `
+
+            <div class="product-card">
+
+
+                <div class="product-name">
+
+                    ${escapeHTML(first.name)}
+
+                </div>
+
+
+                <div class="product-meta">
+
+
+                    <span class="badge">
+
+                        📦
+                        ${escapeHTML(first.category)}
+
+                    </span>
+
+
+                    <span class="badge">
+
+                        📏 Per
+                        ${escapeHTML(first.unit)}
+
+                    </span>
+
+
+                </div>
+
+
+                <div class="lowest">
+
+                    🏆 सबसे सस्ता भाव:
+
+                    <strong>
+                        ₹${lowest}
+                    </strong>
+
+
+                    <span class="unit-text">
+
+                        /
+                        ${escapeHTML(first.unit)}
+
+                    </span>
+
+                </div>
+
+        `;
+
+
+        /* =========================
+           ALL SHOPS
+        ========================= */
+
+        items.forEach(item => {
+
+
+            /* =========================
+               DISTANCE
+            ========================= */
+
+            let distanceHTML = "";
+
+
+            if(
+                nearMeActive &&
+                item.distance !== null &&
+                Number.isFinite(
+                    item.distance
+                )
+            ){
+
+                let distanceText;
+
+
+                if(item.distance < 1){
+
+                    distanceText =
+                        Math.round(
+                            item.distance * 1000
+                        ) + " m";
+
+                }
+
+                else{
+
+                    distanceText =
+                        item.distance.toFixed(1)
+                        + " km";
+
+                }
+
+
+                distanceHTML = `
+
+                    <div class="distance">
+
+                        📍 ${distanceText}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =========================
+               BEST PRICE
+            ========================= */
+
+            let bestPriceHTML = "";
+
+
+            if(
+                Number(item.price) === lowest &&
+                lowest > 0
+            ){
+
+                bestPriceHTML = `
+
+                    <div style="
+                        margin-top:8px;
+                        display:inline-block;
+                        padding:6px 10px;
+                        background:#e7f8ef;
+                        color:#087f5b;
+                        border-radius:6px;
+                        font-size:12px;
+                        font-weight:bold;
+                    ">
+
+                        🥇 BEST PRICE
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* =========================
+               CALL BUTTON
+            ========================= */
+
+            let callButtonHTML = "";
+
+
+            if(item.mobile){
+
+                callButtonHTML = `
+
+                    <a
+                        class="call-btn"
+                        href="tel:${escapeHTML(
+                            item.mobile
+                        )}"
+                    >
+
+                        📞 Call Shop
+
+                    </a>
+
+                `;
+
+            }
+
+
+            /* =========================
+               GOOGLE MAPS DIRECTIONS
+            ========================= */
+
+            let directionButtonHTML = "";
+
+
+            const lat =
+                Number(item.latitude);
+
+
+            const lng =
+                Number(item.longitude);
+
+
+            if(
+                Number.isFinite(lat) &&
+                Number.isFinite(lng)
+            ){
+
+                directionButtonHTML = `
+
+                    <a
+                        class="call-btn"
+                        href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}"
+                        target="_blank"
+                        rel="noopener"
+                        style="
+                            background:#222;
+                            margin-left:6px;
+                        "
+                    >
+
+                        🗺️ Get Directions
+
+                    </a>
+
+                `;
+
+            }
+
+
+            /* =========================
+               SHOP CARD
+            ========================= */
+
+            html += `
+
+                <div class="shop">
+
+
+                    <div class="shop-name">
+
+                        🏪
+                        ${escapeHTML(
+                            item.shopName
+                        )}
+
+                    </div>
+
+
+                    <div class="shop-info">
+
+                        📍
+                        ${escapeHTML(
+                            item.city
+                        )}
+
+                    </div>
+
+
+                    ${
+                        item.address
+                        ?
+                        `
+                        <div class="shop-info">
+
+                            🏠
+                            ${escapeHTML(
+                                item.address
+                            )}
+
+                        </div>
+                        `
+                        :
+                        ""
+                    }
+
+
+                    <div class="price">
+
+                        ₹${Number(item.price) || 0}
+
+                        <span class="unit-text">
+
+                            /
+                            ${escapeHTML(
+                                item.unit
+                            )}
+
+                        </span>
+
+                    </div>
+
+
+                    ${bestPriceHTML}
+
+
+                    ${distanceHTML}
+
+
+                    <div style="
+                        margin-top:10px;
+                    ">
+
+                        ${callButtonHTML}
+
+                        ${directionButtonHTML}
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+        });
+
+
+        html += `
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += "</div>";
+
+
+    container.innerHTML =
+        html;
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================
+   REGISTER SHOP
+========================= */
+
+function registerShop(){
+
+    window.location.href =
+        "Shop-register.html";
+
+}
+
+
+/* =========================
+   START WEBSITE
+========================= */
+
+loadShops();
+
+</script>
+
+
+</body>
+
+</html>
