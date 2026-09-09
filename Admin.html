@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HardwareBhav - Admin Login</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#f1f5f9;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box{
+    width:92%;
+    max-width:400px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#1769aa;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    margin:15px 0 7px;
+    font-weight:bold;
+    color:#333;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#1769aa;
+}
+
+.login-btn{
+    width:100%;
+    margin-top:22px;
+    padding:14px;
+    border:0;
+    border-radius:8px;
+    background:#1769aa;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-btn:active{
+    transform:scale(0.98);
+}
+
+.message{
+    text-align:center;
+    margin-top:15px;
+    color:#d32f2f;
+    font-size:14px;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:20px;
+    color:#1769aa;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">HardwareBhav.in</div>
+
+    <div class="subtitle">
+        🔐 Admin Panel Login
+    </div>
+
+    <form id="adminLoginForm">
+
+        <label>Admin Email</label>
+
+        <input
+            type="email"
+            id="adminEmail"
+            placeholder="Enter admin email"
+            required
+        >
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Enter password"
+            required
+        >
+
+        <button
+            type="submit"
+            class="login-btn"
+        >
+            Login
+        </button>
+
+        <div
+            class="message"
+            id="loginMessage"
+        ></div>
+
+    </form>
+
+    <a
+        href="Index.html"
+        class="back"
+    >
+        ← Back to Website
+    </a>
+
+</div>
+
+<script>
+
+const API =
+    "https://hardwarebhav-backend-uqj7.onrender.com";
+
+document
+.getElementById("adminLoginForm")
+.addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const email =
+        document.getElementById("adminEmail").value.trim();
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+    message.style.color = "#1769aa";
+    message.innerText = "Login checking...";
+
+    try {
+
+        const response = await fetch(
+            API + "/api/admin/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+
+            message.style.color = "#d32f2f";
+
+            message.innerText =
+                data.message ||
+                "Invalid admin login.";
+
+            return;
+        }
+
+        localStorage.setItem(
+            "adminId",
+            data.adminId
+        );
+
+        message.style.color = "#19a974";
+        message.innerText =
+            "✅ Login successful!";
+
+        setTimeout(function(){
+
+            window.location.href =
+                "Admin-dashboard.html";
+
+        }, 500);
+
+    } catch(error) {
+
+        console.error(
+            "ADMIN LOGIN ERROR:",
+            error
+        );
+
+        message.style.color = "#d32f2f";
+
+        message.innerText =
+            "❌ Server se connection nahi ho raha.";
+    }
+
+});
+</script>
+
+</body>
+</html>
