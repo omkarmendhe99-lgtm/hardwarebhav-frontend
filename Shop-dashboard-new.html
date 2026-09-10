@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>HardwareBhav.in - Shop Dashboard</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#172033;
+}
+
+.header{
+    background:#172033;
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.logout-btn{
+    background:#e53935;
+    color:white;
+    border:0;
+    padding:9px 15px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.container{
+    max-width:1100px;
+    margin:25px auto;
+    padding:0 15px;
+}
+
+.card{
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.shop-info{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.shop-details h2{
+    margin-bottom:8px;
+}
+
+.shop-details p{
+    margin:4px 0;
+    color:#555;
+}
+
+.shop-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:flex-start;
+}
+
+.edit-btn{
+    background:#1769aa;
+    color:white;
+    border:0;
+    padding:10px 15px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.location-btn{
+    background:#19a974;
+    color:white;
+    border:0;
+    padding:10px 15px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.stat{
+    background:#f4f7fb;
+    padding:18px;
+    border-radius:8px;
+    text-align:center;
+}
+
+.stat h3{
+    font-size:14px;
+    color:#666;
+    margin-bottom:8px;
+}
+
+.stat p{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.products-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+.add-btn{
+    background:#1769aa;
+    color:white;
+    border:0;
+    padding:10px 16px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:15px;
+}
+
+.filters input,
+.filters select{
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    min-width:180px;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:12px 10px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+th{
+    background:#f4f7fb;
+}
+
+.action-btn{
+    border:0;
+    padding:7px 10px;
+    border-radius:5px;
+    cursor:pointer;
+    margin-right:4px;
+}
+
+.edit-product{
+    background:#1769aa;
+    color:white;
+}
+
+.delete-product{
+    background:#e53935;
+    color:white;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    justify-content:center;
+    align-items:center;
+    padding:15px;
+    z-index:1000;
+}
+
+.modal-content{
+    background:white;
+    width:100%;
+    max-width:450px;
+    border-radius:10px;
+    padding:20px;
+}
+
+.modal-content h2{
+    margin-bottom:15px;
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.save-btn{
+    background:#19a974;
+    color:white;
+    border:0;
+    padding:10px 16px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.cancel-btn{
+    background:#777;
+    color:white;
+    border:0;
+    padding:10px 16px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.loading{
+    text-align:center;
+    padding:30px;
+    color:#666;
+}
+
+.error{
+    text-align:center;
+    padding:30px;
+    color:#e53935;
+}
+
+@media(max-width:700px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        padding:12px 15px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    th,
+    td{
+        font-size:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        HardwareBhav.in
+    </div>
+
+    <button
+        class="logout-btn"
+        id="logoutButton"
+    >
+        Logout
+    </button>
+
+</header>
+
+<main class="container">
+
+    <!-- SHOP INFORMATION -->
+
+    <section class="card">
+
+        <div class="shop-info">
+
+            <div class="shop-details">
+
+                <h2 id="shopName">
+                    Loading...
+                </h2>
+
+                <p>
+                    Owner:
+                    <span id="ownerName">
+                        Loading...
+                    </span>
+                </p>
+
+                <p>
+                    Address:
+                    <span id="shopAddress">
+                        Loading...
+                    </span>
+                </p>
+
+                <p>
+                    City:
+                    <span id="shopCity">
+                        Loading...
+                    </span>
+                </p>
+
+            </div>
+
+            <div class="shop-buttons">
+
+                <button
+                    type="button"
+                    class="edit-btn"
+                    id="editShopButton"
+                >
+                    ✏️ Edit Shop
+                </button>
+
+                <button
+                    type="button"
+                    class="location-btn"
+                    id="setLocationButton"
+                >
+                    📍 Set Shop Location
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <h3>Total Products</h3>
+
+            <p id="totalProducts">
+                0
+            </p>
+
+        </div>
+
+        <div class="stat">
+
+            <h3>Lowest Price</h3>
+
+            <p id="lowestPrice">
+                ₹0
+            </p>
+
+        </div>
+
+        <div class="stat">
+
+            <h3>Highest Price</h3>
+
+            <p id="highestPrice">
+                ₹0
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- PRODUCTS -->
+
+    <section class="card">
+
+        <div class="products-header">
+
+            <h2>
+                My Products
+            </h2>
+
+            <button
+                class="add-btn"
+                id="addProductButton"
+            >
+                ➕ Add Product
+            </button>
+
+        </div>
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="searchProduct"
+                placeholder="Search product..."
+            >
+
+            <select id="categoryFilter">
+
+                <option value="">
+                    All Categories
+                </option>
+
+                <option value="Cement">
+                    Cement
+                </option>
+
+                <option value="Steel">
+                    Steel
+                </option>
+
+                <option value="Paint">
+                    Paint
+                </option>
+
+                <option value="Hardware">
+                    Hardware
+                </option>
+
+                <option value="Electrical">
+                    Electrical
+                </option>
+
+                <option value="Plumbing">
+                    Plumbing
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+            <select id="priceSort">
+
+                <option value="">
+                    Sort by Price
+                </option>
+
+                <option value="low">
+                    Lowest First
+                </option>
+
+                <option value="high">
+                    Highest First
+                </option>
+
+            </select>
+
+        </div>
+
+        <div
+            class="table-wrap"
+            id="productTable"
+        >
+
+            <div class="loading">
+                Loading products...
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- PRODUCT MODAL -->
+
+<div
+    class="modal"
+    id="productModal"
+>
+
+    <div class="modal-content">
+
+        <h2 id="productModalTitle">
+            Add Product
+        </h2>
+
+        <div class="form-group">
+
+            <label>
+                Product Name
+            </label>
+
+            <input
+                type="text"
+                id="productName"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Category
+            </label>
+
+            <select id="productCategory">
+
+                <option value="Cement">
+                    Cement
+                </option>
+
+                <option value="Steel">
+                    Steel
+                </option>
+
+                <option value="Paint">
+                    Paint
+                </option>
+
+                <option value="Hardware">
+                    Hardware
+                </option>
+
+                <option value="Electrical">
+                    Electrical
+                </option>
+
+                <option value="Plumbing">
+                    Plumbing
+                </option>
+
+                <option value="Other">
+                    Other
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Unit
+            </label>
+
+            <input
+                type="text"
+                id="productUnit"
+                placeholder="Piece / Kg / Bag"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Price
+            </label>
+
+            <input
+                type="number"
+                id="productPrice"
+            >
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                class="save-btn"
+                id="saveProductButton"
+            >
+                Save Product
+            </button>
+
+            <button
+                class="cancel-btn"
+                id="cancelProductButton"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SHOP EDIT MODAL -->
+
+<div
+    class="modal"
+    id="shopModal"
+>
+
+    <div class="modal-content">
+
+        <h2>
+            Edit Shop
+        </h2>
+
+        <div class="form-group">
+
+            <label>
+                Shop Name
+            </label>
+
+            <input
+                type="text"
+                id="editShopName"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Owner Name
+            </label>
+
+            <input
+                type="text"
+                id="editOwnerName"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Address
+            </label>
+
+            <input
+                type="text"
+                id="editAddress"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                City
+            </label>
+
+            <input
+                type="text"
+                id="editCity"
+            >
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                class="save-btn"
+                id="saveShopButton"
+            >
+                Save Changes
+            </button>
+
+            <button
+                class="cancel-btn"
+                id="cancelShopButton"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+  <script>
+
+const API = "https://hardwarebhav-backend-uqj7.onrender.com";
+
+const FALLBACK_SHOP_ID =
+    "6a9cf928182c3395619f3c9e";
+
+let SHOP_ID =
+    localStorage.getItem("shopId") ||
+    FALLBACK_SHOP_ID;
+
+localStorage.setItem("shopId", SHOP_ID);
+
+let allProducts = [];
+let editingProductId = null;
+
+
+/* ============================= */
+/* ESCAPE HTML */
+/* ============================= */
+
+function escapeHTML(value){
+
+    if(value === null || value === undefined){
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ============================= */
+/* LOAD SHOP */
+/* ============================= */
+
+async function loadShop(){
+
+    try{
+
+        const response =
+            await fetch(
+                API +
+                "/api/shops/" +
+                SHOP_ID
+            );
+
+        if(!response.ok){
+            throw new Error(
+                "Shop load failed"
+            );
+        }
+
+        const data =
+            await response.json();
+
+        const shop =
+            data.shop || data;
+
+        if(!shop){
+            throw new Error(
+                "Shop data nahi mila"
+            );
+        }
+
+
+        document.getElementById(
+            "shopName"
+        ).textContent =
+            shop.shopName || "My Shop";
+
+
+        document.getElementById(
+            "ownerName"
+        ).textContent =
+            shop.ownerName || "-";
+
+
+        document.getElementById(
+            "shopAddress"
+        ).textContent =
+            shop.address || "-";
+
+
+        document.getElementById(
+            "shopCity"
+        ).textContent =
+            shop.city || "-";
+
+
+        allProducts =
+            Array.isArray(shop.products)
+                ? shop.products
+                : [];
+
+
+        updateStats();
+
+        renderProducts();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        document.getElementById(
+            "productTable"
+        ).innerHTML = `
+            <div class="error">
+                Shop data load nahi hua.
+                <br><br>
+                ${escapeHTML(error.message)}
+            </div>
+        `;
+
+    }
+
+}
+
+
+/* ============================= */
+/* UPDATE STATS */
+/* ============================= */
+
+function updateStats(){
+
+    const total =
+        allProducts.length;
+
+    document.getElementById(
+        "totalProducts"
+    ).textContent = total;
+
+
+    if(total === 0){
+
+        document.getElementById(
+            "lowestPrice"
+        ).textContent = "₹0";
+
+        document.getElementById(
+            "highestPrice"
+        ).textContent = "₹0";
+
+        return;
+
+    }
+
+
+    const prices =
+        allProducts
+            .map(
+                product =>
+                    Number(product.price)
+            )
+            .filter(
+                price =>
+                    Number.isFinite(price)
+            );
+
+
+    if(prices.length === 0){
+
+        document.getElementById(
+            "lowestPrice"
+        ).textContent = "₹0";
+
+        document.getElementById(
+            "highestPrice"
+        ).textContent = "₹0";
+
+        return;
+
+    }
+
+
+    const lowest =
+        Math.min(...prices);
+
+    const highest =
+        Math.max(...prices);
+
+
+    document.getElementById(
+        "lowestPrice"
+    ).textContent =
+        "₹" + lowest;
+
+
+    document.getElementById(
+        "highestPrice"
+    ).textContent =
+        "₹" + highest;
+
+}
+
+
+/* ============================= */
+/* RENDER PRODUCTS */
+/* ============================= */
+
+function renderProducts(){
+
+    const table =
+        document.getElementById(
+            "productTable"
+        );
+
+
+    let products =
+        [...allProducts];
+
+
+    const search =
+        document.getElementById(
+            "searchProduct"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+    const category =
+        document.getElementById(
+            "categoryFilter"
+        ).value;
+
+
+    const sort =
+        document.getElementById(
+            "priceSort"
+        ).value;
+
+
+    if(search){
+
+        products =
+            products.filter(
+                product =>
+                    String(
+                        product.name || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+    }
+
+
+    if(category){
+
+        products =
+            products.filter(
+                product =>
+                    (
+                        product.category ||
+                        "Other"
+                    ) === category
+            );
+
+    }
+
+
+    if(sort === "low"){
+
+        products.sort(
+            (a,b) =>
+                Number(a.price || 0) -
+                Number(b.price || 0)
+        );
+
+    }
+
+
+    if(sort === "high"){
+
+        products.sort(
+            (a,b) =>
+                Number(b.price || 0) -
+                Number(a.price || 0)
+        );
+
+    }
+
+
+    if(products.length === 0){
+
+        table.innerHTML = `
+            <div class="loading">
+                No products found.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    table.innerHTML = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Unit</th>
+                    <th>Price</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                ${products.map(
+                    product => {
+
+                        const id =
+                            product._id || "";
+
+                        return `
+
+                        <tr>
+
+                            <td>
+                                ${escapeHTML(
+                                    product.name ||
+                                    product.productName ||
+                                    "-"
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    product.category ||
+                                    "Other"
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    product.unit ||
+                                    "Piece"
+                                )}
+                            </td>
+
+                            <td>
+                                ₹${Number(
+                                    product.price || 0
+                                )}
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="action-btn edit-product"
+                                    onclick="editProduct('${id}')"
+                                >
+                                    Edit
+                                </button>
+
+                                <button
+                                    class="action-btn delete-product"
+                                    onclick="deleteProduct('${id}')"
+                                >
+                                    Delete
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        `;
+
+                    }
+                ).join("")}
+
+            </tbody>
+
+        </table>
+
+    `;
+
+}
+    /* ============================= */
+/* ADD PRODUCT */
+/* ============================= */
+
+function openAddProduct(){
+
+    editingProductId = null;
+
+    document.getElementById(
+        "productModalTitle"
+    ).textContent = "Add Product";
+
+    document.getElementById(
+        "productName"
+    ).value = "";
+
+    document.getElementById(
+        "productCategory"
+    ).value = "Cement";
+
+    document.getElementById(
+        "productUnit"
+    ).value = "";
+
+    document.getElementById(
+        "productPrice"
+    ).value = "";
+
+    document.getElementById(
+        "productModal"
+    ).style.display = "flex";
+
+}
+
+
+/* ============================= */
+/* EDIT PRODUCT */
+/* ============================= */
+
+function editProduct(id){
+
+    const product =
+        allProducts.find(
+            item => String(item._id) === String(id)
+        );
+
+    if(!product){
+        alert("Product nahi mila.");
+        return;
+    }
+
+    editingProductId = id;
+
+    document.getElementById(
+        "productModalTitle"
+    ).textContent = "Edit Product";
+
+    document.getElementById(
+        "productName"
+    ).value =
+        product.name ||
+        product.productName ||
+        "";
+
+    document.getElementById(
+        "productCategory"
+    ).value =
+        product.category ||
+        "Other";
+
+    document.getElementById(
+        "productUnit"
+    ).value =
+        product.unit ||
+        "Piece";
+
+    document.getElementById(
+        "productPrice"
+    ).value =
+        product.price || "";
+
+    document.getElementById(
+        "productModal"
+    ).style.display = "flex";
+
+}
+
+
+/* ============================= */
+/* SAVE PRODUCT */
+/* ============================= */
+
+async function saveProduct(){
+
+    const name =
+        document.getElementById(
+            "productName"
+        ).value.trim();
+
+    const category =
+        document.getElementById(
+            "productCategory"
+        ).value;
+
+    const unit =
+        document.getElementById(
+            "productUnit"
+        ).value.trim();
+
+    const price =
+        Number(
+            document.getElementById(
+                "productPrice"
+            ).value
+        );
+
+
+    if(!name){
+
+        alert(
+            "Product name enter karein."
+        );
+
+        return;
+
+    }
+
+
+    if(!unit){
+
+        alert(
+            "Unit enter karein."
+        );
+
+        return;
+
+    }
+
+
+    if(!Number.isFinite(price) || price <= 0){
+
+        alert(
+            "Valid price enter karein."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        let response;
+
+
+        if(editingProductId){
+
+            response =
+                await fetch(
+                    API +
+                    "/api/shops/" +
+                    SHOP_ID +
+                    "/products/" +
+                    editingProductId,
+                    {
+                        method:"PUT",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:JSON.stringify({
+
+                            name:name,
+
+                            category:category,
+
+                            unit:unit,
+
+                            price:price
+
+                        })
+
+                    }
+                );
+
+        }
+        else{
+
+            response =
+                await fetch(
+                    API +
+                    "/api/shops/" +
+                    SHOP_ID +
+                    "/products",
+                    {
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:JSON.stringify({
+
+                            name:name,
+
+                            category:category,
+
+                            unit:unit,
+
+                            price:price
+
+                        })
+
+                    }
+                );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || data.success === false){
+
+            throw new Error(
+                data.message ||
+                "Product save nahi hua."
+            );
+
+        }
+
+
+        alert(
+            editingProductId
+                ? "✅ Product updated successfully!"
+                : "✅ Product added successfully!"
+        );
+
+
+        document.getElementById(
+            "productModal"
+        ).style.display = "none";
+
+
+        editingProductId = null;
+
+
+        await loadShop();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "PRODUCT SAVE ERROR:",
+            error
+        );
+
+        alert(
+            "❌ Product save nahi hua.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ============================= */
+/* DELETE PRODUCT */
+/* ============================= */
+
+async function deleteProduct(id){
+
+    const product =
+        allProducts.find(
+            item =>
+                String(item._id) === String(id)
+        );
+
+
+    const productName =
+        product
+            ? (
+                product.name ||
+                product.productName ||
+                "this product"
+            )
+            : "this product";
+
+
+    const confirmDelete =
+        confirm(
+            "Kya aap '" +
+            productName +
+            "' delete karna chahte hain?"
+        );
+
+
+    if(!confirmDelete){
+        return;
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API +
+                "/api/shops/" +
+                SHOP_ID +
+                "/products/" +
+                id,
+                {
+                    method:"DELETE"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || data.success === false){
+
+            throw new Error(
+                data.message ||
+                "Product delete nahi hua."
+            );
+
+        }
+
+
+        alert(
+            "✅ Product delete ho gaya!"
+        );
+
+
+        await loadShop();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "DELETE PRODUCT ERROR:",
+            error
+        );
+
+        alert(
+            "❌ Product delete nahi hua.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ============================= */
+/* OPEN SHOP EDIT */
+/* ============================= */
+
+function openShopEdit(){
+
+    document.getElementById(
+        "editShopName"
+    ).value =
+        document.getElementById(
+            "shopName"
+        ).textContent;
+
+    document.getElementById(
+        "editOwnerName"
+    ).value =
+        document.getElementById(
+            "ownerName"
+        ).textContent;
+
+    document.getElementById(
+        "editAddress"
+    ).value =
+        document.getElementById(
+            "shopAddress"
+        ).textContent;
+
+    document.getElementById(
+        "editCity"
+    ).value =
+        document.getElementById(
+            "shopCity"
+        ).textContent;
+
+
+    document.getElementById(
+        "shopModal"
+    ).style.display = "flex";
+
+}
+
+
+/* ============================= */
+/* SAVE SHOP */
+/* ============================= */
+
+async function saveShop(){
+
+    const shopName =
+        document.getElementById(
+            "editShopName"
+        ).value.trim();
+
+    const ownerName =
+        document.getElementById(
+            "editOwnerName"
+        ).value.trim();
+
+    const address =
+        document.getElementById(
+            "editAddress"
+        ).value.trim();
+
+    const city =
+        document.getElementById(
+            "editCity"
+        ).value.trim();
+
+
+    if(
+        !shopName ||
+        !ownerName ||
+        !address ||
+        !city
+    ){
+
+        alert(
+            "Please sabhi details fill karein."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const response =
+            await fetch(
+                API +
+                "/api/shops/" +
+                SHOP_ID,
+                {
+                    method:"PUT",
+
+                    headers:{
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        shopName:shopName,
+
+                        ownerName:ownerName,
+
+                        address:address,
+
+                        city:city
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || data.success === false){
+
+            throw new Error(
+                data.message ||
+                "Shop update failed."
+            );
+
+        }
+
+
+        alert(
+            "✅ Shop details updated!"
+        );
+
+
+        document.getElementById(
+            "shopModal"
+        ).style.display = "none";
+
+
+        await loadShop();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "SHOP SAVE ERROR:",
+            error
+        );
+
+        alert(
+            "❌ Shop details update nahi hui.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ============================= */
+/* SET SHOP LOCATION */
+/* ============================= */
+
+async function setShopLocation(){
+
+    if(!navigator.geolocation){
+
+        alert(
+            "GPS support nahi hai."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "📍 Location lene ke liye GPS Allow karein."
+    );
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        async function(position){
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+
+            try{
+
+                const response =
+                    await fetch(
+                        API +
+                        "/api/shops/" +
+                        SHOP_ID +
+                        "/location",
+                        {
+                            method:"PUT",
+
+                            headers:{
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:JSON.stringify({
+
+                                latitude:
+                                    latitude,
+
+                                longitude:
+                                    longitude
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if(
+                    !response.ok ||
+                    data.success === false
+                ){
+
+                    throw new Error(
+                        data.message ||
+                        "Location save failed."
+                    );
+
+                }
+
+
+                alert(
+                    "✅ Shop location successfully save ho gayi!\n\n" +
+                    "Latitude: " +
+                    latitude +
+                    "\n" +
+                    "Longitude: " +
+                    longitude
+                );
+
+            }
+
+            catch(error){
+
+                console.error(
+                    "LOCATION SAVE ERROR:",
+                    error
+                );
+
+                alert(
+                    "❌ Location save nahi hui.\n\n" +
+                    error.message
+                );
+
+            }
+
+        },
+
+        function(error){
+
+            console.error(
+                "GPS ERROR:",
+                error
+            );
+
+            alert(
+                "❌ Location nahi mil paayi.\n\n" +
+                "GPS/Location ON karke Allow karein."
+            );
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:15000,
+            maximumAge:0
+        }
+
+    );
+
+    }
+    /* ============================= */
+/* BUTTON EVENTS */
+/* ============================= */
+
+document
+    .getElementById("addProductButton")
+    .addEventListener(
+        "click",
+        openAddProduct
+    );
+
+
+document
+    .getElementById("saveProductButton")
+    .addEventListener(
+        "click",
+        saveProduct
+    );
+
+
+document
+    .getElementById("cancelProductButton")
+    .addEventListener(
+        "click",
+        function(){
+
+            document.getElementById(
+                "productModal"
+            ).style.display = "none";
+
+        }
+    );
+
+
+document
+    .getElementById("editShopButton")
+    .addEventListener(
+        "click",
+        openShopEdit
+    );
+
+
+document
+    .getElementById("saveShopButton")
+    .addEventListener(
+        "click",
+        saveShop
+    );
+
+
+document
+    .getElementById("cancelShopButton")
+    .addEventListener(
+        "click",
+        function(){
+
+            document.getElementById(
+                "shopModal"
+            ).style.display = "none";
+
+        }
+    );
+
+
+/* ============================= */
+/* 📍 LOCATION BUTTON */
+/* ============================= */
+
+document
+    .getElementById("setLocationButton")
+    .addEventListener(
+        "click",
+        setShopLocation
+    );
+
+
+/* ============================= */
+/* SEARCH / FILTER / SORT */
+/* ============================= */
+
+document
+    .getElementById("searchProduct")
+    .addEventListener(
+        "input",
+        renderProducts
+    );
+
+
+document
+    .getElementById("categoryFilter")
+    .addEventListener(
+        "change",
+        renderProducts
+    );
+
+
+document
+    .getElementById("priceSort")
+    .addEventListener(
+        "change",
+        renderProducts
+    );
+
+
+/* ============================= */
+/* MODAL OUTSIDE CLICK */
+/* ============================= */
+
+document
+    .getElementById("productModal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target ===
+                this
+            ){
+
+                this.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById("shopModal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target ===
+                this
+            ){
+
+                this.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+/* ============================= */
+/* LOGOUT */
+/* ============================= */
+
+document
+    .getElementById("logoutButton")
+    .addEventListener(
+        "click",
+        function(){
+
+            localStorage.removeItem(
+                "shopId"
+            );
+
+            window.location.href =
+                "Shop-login.html";
+
+        }
+    );
+
+
+/* ============================= */
+/* START DASHBOARD */
+/* ============================= */
+
+loadShop();
+
+</script>
+
+</body>
+
+</html>
