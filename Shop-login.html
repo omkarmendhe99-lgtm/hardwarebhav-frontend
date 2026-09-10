@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shop Login - HardwareBhav.in</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f1f5f9;
+    padding:15px;
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:30px 25px;
+    border-radius:15px;
+    box-shadow:0 5px 25px rgba(0,0,0,.12);
+}
+
+.logo{
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    color:#0f766e;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+.group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+    font-size:16px;
+}
+
+.password-box{
+    position:relative;
+}
+
+.password-box input{
+    padding-right:75px;
+}
+
+.show-btn{
+    position:absolute;
+    right:7px;
+    top:7px;
+    padding:9px 10px;
+    border:0;
+    border-radius:5px;
+    background:#e2e8f0;
+    cursor:pointer;
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:8px;
+    background:#0f766e;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-btn:disabled{
+    background:#94a3b8;
+}
+
+.register-link{
+    text-align:center;
+    margin-top:20px;
+}
+
+.register-link a{
+    color:#2563eb;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+#message{
+    text-align:center;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<div class="logo">
+    HardwareBhav.in
+</div>
+
+<div class="subtitle">
+    Shop Owner Login
+</div>
+
+
+<form id="loginForm">
+
+
+<!-- MOBILE -->
+
+<div class="group">
+
+<label>
+    Mobile Number
+</label>
+
+<input
+    type="tel"
+    id="mobile"
+    placeholder="Enter 10 digit mobile number"
+    maxlength="10"
+    inputmode="numeric"
+    required
+>
+
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="group">
+
+<label>
+    Password
+</label>
+
+<div class="password-box">
+
+<input
+    type="password"
+    id="password"
+    placeholder="Enter password"
+    required
+>
+
+<button
+    type="button"
+    class="show-btn"
+    onclick="togglePassword()"
+>
+    Show
+</button>
+
+</div>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<button
+    type="submit"
+    class="login-btn"
+    id="loginBtn"
+>
+    Login
+</button>
+
+
+<div id="message"></div>
+
+</form>
+
+
+<div class="register-link">
+
+New Shop?
+
+<a href="Shop-register.html">
+    Register Shop
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* BACKEND */
+
+const API = "http://127.0.0.1:5000";
+
+
+/* SHOW / HIDE PASSWORD */
+
+function togglePassword(){
+
+    const password =
+        document.getElementById("password");
+
+    const button =
+        document.querySelector(".show-btn");
+
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+        button.innerText = "Hide";
+
+    }else{
+
+        password.type = "password";
+
+        button.innerText = "Show";
+
+    }
+
+}
+
+
+/* LOGIN */
+
+document
+.getElementById("loginForm")
+.addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+
+    const mobile =
+        document.getElementById("mobile")
+        .value.trim();
+
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+
+    const button =
+        document.getElementById("loginBtn");
+
+
+    const message =
+        document.getElementById("message");
+
+
+    /* MOBILE VALIDATION */
+
+    if(!/^[0-9]{10}$/.test(mobile)){
+
+        message.innerText =
+            "❌ 10 digit mobile number enter kare.";
+
+        return;
+    }
+
+
+    if(!password){
+
+        message.innerText =
+            "❌ Password enter kare.";
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.innerText =
+        "Logging in...";
+
+    message.innerText =
+        "Please wait...";
+
+
+    try{
+
+        const response =
+            await fetch(
+                API + "/api/shops/login",
+                {
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        mobile:mobile,
+
+                        password:password
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Login Response:",
+            data
+        );
+
+
+        /* SUCCESS */
+
+        if(
+            response.ok &&
+            data.success &&
+            data.shopId
+        ){
+
+            localStorage.setItem(
+                "shopId",
+                data.shopId
+            );
+
+
+            message.innerText =
+                "✅ Login Successful!";
+
+
+            setTimeout(function(){
+
+                window.location.href =
+                    "Shop-dashboard-new.html";
+
+            },700);
+
+
+        }else{
+
+            message.innerText =
+                "❌ " +
+                (
+                    data.message ||
+                    "Login failed."
+                );
+
+
+            button.disabled = false;
+
+            button.innerText =
+                "Login";
+
+        }
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        message.innerText =
+            "❌ Backend server se connection nahi ho raha.";
+
+
+        button.disabled = false;
+
+        button.innerText =
+            "Login";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
