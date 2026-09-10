@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HardwareBhav - Shop Registration</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    padding:15px;
+    background:#f1f5f9;
+}
+
+.container{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:22px;
+    border-radius:14px;
+    box-shadow:0 4px 20px rgba(0,0,0,.10);
+}
+
+h1{
+    text-align:center;
+    color:#0f766e;
+    margin-bottom:5px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+.group{
+    margin-bottom:16px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+    font-size:16px;
+    background:white;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.password-box{
+    position:relative;
+}
+
+.password-box input{
+    padding-right:75px;
+}
+
+.show-btn{
+    position:absolute;
+    right:7px;
+    top:7px;
+    padding:9px 10px;
+    border:0;
+    border-radius:5px;
+    background:#e2e8f0;
+    cursor:pointer;
+}
+
+.hint{
+    font-size:12px;
+    color:#64748b;
+    margin-top:5px;
+}
+
+.location-btn{
+    background:#475569;
+    color:white;
+    border:0;
+    padding:11px 15px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+#locationStatus{
+    margin-top:8px;
+    font-size:13px;
+}
+
+.products{
+    border-top:1px solid #ddd;
+    margin-top:25px;
+    padding-top:20px;
+}
+
+.product{
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:12px;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:8px;
+}
+
+.add-btn{
+    background:#2563eb;
+    color:white;
+    border:0;
+    padding:11px 15px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.remove-btn{
+    background:#dc2626;
+    color:white;
+    border:0;
+    padding:9px 12px;
+    border-radius:6px;
+    margin-top:8px;
+    cursor:pointer;
+}
+
+.register-btn{
+    width:100%;
+    margin-top:20px;
+    padding:14px;
+    background:#0f766e;
+    color:white;
+    border:0;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.register-btn:disabled{
+    background:#94a3b8;
+}
+
+#message{
+    text-align:center;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+
+    body{
+        padding:8px;
+    }
+
+    .container{
+        padding:17px;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>HardwareBhav.in</h1>
+
+<p class="subtitle">Shop Owner Registration</p>
+
+<form id="shopForm">
+
+<!-- OWNER -->
+
+<div class="group">
+<label>Owner Name *</label>
+
+<input
+type="text"
+id="ownerName"
+placeholder="Enter owner name"
+required>
+</div>
+
+
+<!-- MOBILE -->
+
+<div class="group">
+<label>Mobile Number *</label>
+
+<input
+type="tel"
+id="mobile"
+placeholder="10 digit mobile number"
+maxlength="10"
+inputmode="numeric"
+required>
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="group">
+<label>Email *</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter email"
+required>
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="group">
+
+<label>Create Password *</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="password"
+placeholder="Minimum 6 characters"
+minlength="6"
+required>
+
+<button
+type="button"
+class="show-btn"
+onclick="togglePassword('password',this)">
+Show
+</button>
+
+</div>
+
+<p class="hint">
+Password minimum 6 characters ka hona chahiye.
+</p>
+
+</div>
+
+
+<!-- CONFIRM PASSWORD -->
+
+<div class="group">
+
+<label>Confirm Password *</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Re-enter password"
+minlength="6"
+required>
+
+<button
+type="button"
+class="show-btn"
+onclick="togglePassword('confirmPassword',this)">
+Show
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SHOP -->
+
+<div class="group">
+
+<label>Shop Name *</label>
+
+<input
+type="text"
+id="shopName"
+placeholder="Enter shop name"
+required>
+
+</div>
+
+
+<!-- ADDRESS -->
+
+<div class="group">
+
+<label>Shop Address *</label>
+
+<textarea
+id="address"
+placeholder="Enter complete shop address"
+required></textarea>
+
+</div>
+
+
+<!-- CITY -->
+
+<div class="group">
+
+<label>City *</label>
+
+<input
+type="text"
+id="city"
+placeholder="Example: Dharashiv"
+required>
+
+</div>
+
+
+<!-- LOCATION -->
+
+<div class="group">
+
+<label>Shop Location</label>
+
+<button
+type="button"
+class="location-btn"
+onclick="getLocation()">
+
+📍 Get My Location
+
+</button>
+
+<p id="locationStatus">
+Location not selected
+</p>
+
+</div>
+
+
+<!-- PRODUCTS -->
+
+<div class="products">
+
+<h2>Products & Prices</h2>
+
+<p class="hint">
+Shop mein available products aur unka price add karein.
+</p>
+
+<div id="productsList">
+
+
+<!-- PRODUCT 1 -->
+
+<div class="product">
+
+<div class="product-grid">
+
+<input
+type="text"
+class="product-name"
+placeholder="Product name"
+required>
+
+
+<select
+class="product-category"
+required>
+
+<option value="">Category</option>
+<option value="Cement">Cement</option>
+<option value="Steel/TMT">Steel / TMT</option>
+<option value="Plumbing">Plumbing</option>
+<option value="Electrical">Electrical</option>
+<option value="Paint">Paint</option>
+<option value="Hardware">Hardware</option>
+<option value="Tools">Tools</option>
+<option value="Tiles">Tiles</option>
+<option value="Other">Other</option>
+
+</select>
+
+
+<select
+class="product-unit"
+required>
+
+<option value="">Unit</option>
+<option value="Piece">Piece</option>
+<option value="Kg">Kg</option>
+<option value="Quintal">Quintal</option>
+<option value="Ton">Ton</option>
+<option value="Bag">Bag</option>
+<option value="Meter">Meter</option>
+<option value="Feet">Feet</option>
+<option value="Litre">Litre</option>
+<option value="Box">Box</option>
+<option value="Set">Set</option>
+
+</select>
+
+
+<input
+type="number"
+class="product-price"
+placeholder="Price ₹"
+min="0"
+step="0.01"
+required>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button
+type="button"
+class="add-btn"
+onclick="addProduct()">
+
++ Add Another Product
+
+</button>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<button
+type="submit"
+class="register-btn"
+id="registerBtn">
+
+Register Shop
+
+</button>
+
+
+<div id="message"></div>
+
+</form>
+
+</div>
+
+
+<script>
+
+/* BACKEND */
+
+const API = "http://127.0.0.1:5000";
+
+
+/* PASSWORD SHOW / HIDE */
+
+function togglePassword(id,button){
+
+    const input =
+        document.getElementById(id);
+
+    if(input.type === "password"){
+
+        input.type = "text";
+        button.innerText = "Hide";
+
+    }else{
+
+        input.type = "password";
+        button.innerText = "Show";
+
+    }
+
+}
+
+
+/* LOCATION */
+
+let latitude = null;
+let longitude = null;
+
+function getLocation(){
+
+    const status =
+        document.getElementById("locationStatus");
+
+    if(!navigator.geolocation){
+
+        status.innerText =
+            "❌ Location supported nahi hai.";
+
+        return;
+    }
+
+    status.innerText =
+        "📍 Location getting...";
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            latitude =
+                position.coords.latitude;
+
+            longitude =
+                position.coords.longitude;
+
+            status.innerText =
+                "✅ Location selected";
+
+        },
+
+        function(){
+
+            status.innerText =
+                "❌ Location permission denied.";
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:10000,
+            maximumAge:60000
+        }
+    );
+}
+
+
+/* ADD PRODUCT */
+
+function addProduct(){
+
+    const list =
+        document.getElementById("productsList");
+
+    const div =
+        document.createElement("div");
+
+    div.className = "product";
+
+    div.innerHTML = `
+
+        <div class="product-grid">
+
+            <input
+            type="text"
+            class="product-name"
+            placeholder="Product name"
+            required>
+
+            <select
+            class="product-category"
+            required>
+
+                <option value="">
+                Category
+                </option>
+
+                <option value="Cement">
+                Cement
+                </option>
+
+                <option value="Steel/TMT">
+                Steel / TMT
+                </option>
+
+                <option value="Plumbing">
+                Plumbing
+                </option>
+
+                <option value="Electrical">
+                Electrical
+                </option>
+
+                <option value="Paint">
+                Paint
+                </option>
+
+                <option value="Hardware">
+                Hardware
+                </option>
+
+                <option value="Tools">
+                Tools
+                </option>
+
+                <option value="Tiles">
+                Tiles
+                </option>
+
+                <option value="Other">
+                Other
+                </option>
+
+            </select>
+
+            <select
+            class="product-unit"
+            required>
+
+                <option value="">
+                Unit
+                </option>
+
+                <option value="Piece">
+                Piece
+                </option>
+
+                <option value="Kg">
+                Kg
+                </option>
+
+                <option value="Quintal">
+                Quintal
+                </option>
+
+                <option value="Ton">
+                Ton
+                </option>
+
+                <option value="Bag">
+                Bag
+                </option>
+
+                <option value="Meter">
+                Meter
+                </option>
+
+                <option value="Feet">
+                Feet
+                </option>
+
+                <option value="Litre">
+                Litre
+                </option>
+
+                <option value="Box">
+                Box
+                </option>
+
+                <option value="Set">
+                Set
+                </option>
+
+            </select>
+
+            <input
+            type="number"
+            class="product-price"
+            placeholder="Price ₹"
+            min="0"
+            step="0.01"
+            required>
+
+        </div>
+
+        <button
+        type="button"
+        class="remove-btn"
+        onclick="this.parentElement.remove()">
+
+        🗑️ Remove
+
+        </button>
+    `;
+
+    list.appendChild(div);
+}
+
+
+/* FORM SUBMIT */
+
+document
+.getElementById("shopForm")
+.addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+    const message =
+        document.getElementById("message");
+
+    const button =
+        document.getElementById("registerBtn");
+
+
+    /* DETAILS */
+
+    const ownerName =
+        document.getElementById("ownerName")
+        .value.trim();
+
+    const mobile =
+        document.getElementById("mobile")
+        .value.trim();
+
+    const email =
+        document.getElementById("email")
+        .value.trim();
+
+    const password =
+        document.getElementById("password")
+        .value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword")
+        .value;
+
+    const shopName =
+        document.getElementById("shopName")
+        .value.trim();
+
+    const address =
+        document.getElementById("address")
+        .value.trim();
+
+    const city =
+        document.getElementById("city")
+        .value.trim();
+
+
+    /* MOBILE */
+
+    if(!/^[0-9]{10}$/.test(mobile)){
+
+        message.innerText =
+            "❌ Mobile number 10 digit ka hona chahiye.";
+
+        return;
+    }
+
+
+    /* PASSWORD */
+
+    if(password.length < 6){
+
+        message.innerText =
+            "❌ Password minimum 6 characters ka hona chahiye.";
+
+        return;
+    }
+
+
+    if(password !== confirmPassword){
+
+        message.innerText =
+            "❌ Password match nahi kar raha.";
+
+        return;
+    }
+
+
+    /* PRODUCTS */
+
+    const names =
+        document.querySelectorAll(".product-name");
+
+    const categories =
+        document.querySelectorAll(".product-category");
+
+    const units =
+        document.querySelectorAll(".product-unit");
+
+    const prices =
+        document.querySelectorAll(".product-price");
+
+
+    const products = [];
+
+
+    for(let i=0;i<names.length;i++){
+
+        const name =
+            names[i].value.trim();
+
+        const category =
+            categories[i].value;
+
+        const unit =
+            units[i].value;
+
+        const price =
+            prices[i].value;
+
+
+        if(!name || !category || !unit || price === ""){
+
+            message.innerText =
+                "❌ Product ki sari details bhare.";
+
+            return;
+        }
+
+
+        products.push({
+
+            name:name,
+
+            category:category,
+
+            unit:unit,
+
+            price:Number(price)
+
+        });
+
+    }
+
+
+    /* BUTTON */
+
+    button.disabled = true;
+
+    button.innerText =
+        "Registering...";
+
+
+    message.innerText =
+        "Please wait...";
+
+
+    /* DATA */
+
+    const shopData = {
+
+        ownerName:ownerName,
+
+        mobile:mobile,
+
+        email:email,
+
+        password:password,
+
+        shopName:shopName,
+
+        address:address,
+
+        city:city,
+
+        latitude:latitude,
+
+        longitude:longitude,
+
+        products:products
+
+    };
+
+
+    try{
+
+        const response =
+            await fetch(
+                API + "/api/shops/register",
+                {
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
+
+                    body:
+                    JSON.stringify(shopData)
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(data);
+
+
+        if(
+            response.ok &&
+            data.success &&
+            data.shop &&
+            data.shop._id
+        ){
+
+            localStorage.setItem(
+                "shopId",
+                data.shop._id
+            );
+
+
+            message.innerText =
+                "✅ Registration Successful!";
+
+
+            setTimeout(function(){
+
+                window.location.href =
+                    "Shop-dashboard-new.html";
+
+            },800);
+
+
+        }else{
+
+            message.innerText =
+                "❌ " +
+                (data.message ||
+                "Registration failed.");
+
+            button.disabled = false;
+
+            button.innerText =
+                "Register Shop";
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        message.innerText =
+            "❌ Backend server se connection nahi ho raha.";
+
+        button.disabled = false;
+
+        button.innerText =
+            "Register Shop";
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+   
