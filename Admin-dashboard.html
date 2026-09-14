@@ -95,8 +95,7 @@ body{
     font-size:30px;
     font-weight:bold;
 }
-
-.tabs{
+    .tabs{
     display:flex;
     gap:10px;
     flex-wrap:wrap;
@@ -128,7 +127,7 @@ body{
     display:none;
 }
 
-  .panel h2{
+.panel h2{
     margin-bottom:8px;
 }
 
@@ -256,7 +255,7 @@ td{
     cursor:pointer;
 }
 
-.activity{
+    .activity{
     display:grid;
     gap:12px;
 }
@@ -269,653 +268,566 @@ td{
 
 @media(max-width:800px){
 
-.stats{
-    grid-template-columns:repeat(2,1fr);
-}
-
-.plan-grid{
-    grid-template-columns:1fr;
-}
-
-.container{
-    padding:15px;
-  }
+    .stats{
+        grid-template-columns:repeat(2,1fr);
     }
+
+    .plan-grid{
+        grid-template-columns:1fr;
+    }
+
+    .container{
+        padding:15px;
+    }
+}
 
 @media(max-width:500px){
 
-.stats{
-    grid-template-columns:1fr;
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        padding:15px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .logout{
+        padding:8px 12px;
+    }
+
+    .tabs{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .tab-btn{
+        width:100%;
+    }
+
+    .panel{
+        padding:18px;
+    }
+
+    .welcome{
+        padding:18px;
+    }
 }
 
-.header{
-    padding:15px;
+.action-btn{
+    border:0;
+    color:white;
+    padding:6px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    margin:3px;
+    font-size:12px;
 }
 
-.logo{
-    font-size:20px;
+.view-btn{
+    background:#20c997;
 }
 
-.logout{
-    padding:8px 12px;
+.edit-btn{
+    background:#175cd3;
 }
 
-.tabs{
-    display:grid;
-    grid-template-columns:1fr 1fr;
+.disable-btn{
+    background:#ef4444;
 }
 
-.tab-btn{
-    width:100%;
+.enable-btn{
+    background:#087443;
 }
 
-.panel{
-    padding:18px;
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    z-index:9999;
+    padding:20px;
+    overflow:auto;
 }
 
-.welcome{
-    padding:18px;
-}
+.modal-box{
+    background:white;
+    max-width:700px;
+    margin:40px auto;
+    border
 
-}
-
-</style>
-
+    </style>
 </head>
 
 <body>
 
 <header class="header">
 
-<div class="logo">
-Hardware<span>Bhav.in</span>
-</div>
+    <div class="logo">
+        Hardware<span>Bhav.in</span>
+    </div>
 
-<button class="logout" onclick="logoutAdmin()">
-Logout
-</button>
+    <button class="logout" onclick="logoutAdmin()">
+        Logout
+    </button>
 
 </header>
 
 <main class="container">
 
-<div class="welcome">
+    <div class="welcome">
+        <h1>Admin Dashboard</h1>
+        <p>
+            HardwareBhav.in ko yahan se manage karein.
+        </p>
+    </div>
+
+    <section class="stats">
 
-<h1>Admin Dashboard</h1>
+        <div class="stat-card">
+            <div class="icon">🏪</div>
+            <h3>Total Shops</h3>
+            <div class="number" id="totalShops">0</div>
+        </div>
 
-<p>
-HardwareBhav.in ko yahan se manage karein.
-</p>
+        <div class="stat-card">
+            <div class="icon">📦</div>
+            <h3>Total Products</h3>
+            <div class="number" id="totalProducts">0</div>
+        </div>
 
-</div>
+        <div class="stat-card">
+            <div class="icon">🆓</div>
+            <h3>Free Shops</h3>
+            <div class="number" id="freeShops">0</div>
+        </div>
 
-<section class="stats">
+        <div class="stat-card">
+            <div class="icon">💎</div>
+            <h3>Paid Shops</h3>
+            <div class="number" id="paidShops">0</div>
+        </div>
 
-<div class="stat-card">
+    </section>
 
-<div class="icon">🏪</div>
+    <div class="tabs">
 
-<h3>Total Shops</h3>
+        <button class="tab-btn active"
+            onclick="showTab('shops',this)">
+            🏪 Shops
+        </button>
 
-<div class="number" id="totalShops">
-0
-</div>
+        <button class="tab-btn"
+            onclick="showTab('products',this)">
+            📦 Products
+        </button>
 
-</div>
+        <button class="tab-btn"
+            onclick="showTab('subscriptions',this)">
+            💳 Subscriptions
+        </button>
 
-<div class="stat-card">
+        <button class="tab-btn"
+            onclick="showTab('activity',this)">
+            📊 Activity
+        </button>
 
-<div class="icon">📦</div>
+    </div>
 
-<h3>Total Products</h3>
+    <section id="shops" class="panel">
 
-<div class="number" id="totalProducts">
-0
-</div>
+        <h2>🏪 Shop Management</h2>
 
-</div>
+        <p class="panel-subtitle">
+            Registered hardware shops ki information.
+        </p>
 
-<div class="stat-card">
+        <div id="shopError" class="error"></div>
 
-<div class="icon">🆓</div>
+        <input
+            type="text"
+            id="shopSearch"
+            class="search-box"
+            placeholder="Shop name, owner, city search karein..."
+            oninput="filterShops()"
+        >
 
-<h3>Free Shops</h3>
+        <div class="table-wrap">
 
-<div class="number" id="freeShops">
-0
-</div>
+            <table>
 
-</div>
+                <thead>
+                    <tr>
+                        <th>Shop</th>
+                        <th>Owner</th>
+                        <th>Mobile</th>
+                        <th>City</th>
+                        <th>Products</th>
+                        <th>Plan</th>
+                    </tr>
+                </thead>
 
-<div class="stat-card">
+                <tbody id="shopsTable">
 
-<div class="icon">💎</div>
+                    <tr>
+                        <td colspan="6" class="loading">
+                            Shops loading...
+                        </td>
+                    </tr>
 
-<h3>Paid Shops</h3>
+                </tbody>
 
-<div class="number" id="paidShops">
-0
-</div>
+            </table>
 
-</div>
+        </div>
 
-</section>
+    </section>
 
-<div class="tabs">
+        <!-- PRODUCTS -->
 
-<button class="tab-btn active"
-onclick="showTab('shops',this)">
-🏪 Shops
-</button>
+    <section id="products" class="panel hidden">
 
-<button class="tab-btn"
-onclick="showTab('products',this)">
-📦 Products
-</button>
+        <h2>📦 Products</h2>
 
-<button class="tab-btn"
-onclick="showTab('subscriptions',this)">
-💳 Subscriptions
-</button>
+        <p class="panel-subtitle">
+            Shops ke listed products ka overview.
+        </p>
 
-<button class="tab-btn"
-onclick="showTab('activity',this)">
-📊 Activity
-</button>
+        <div class="table-wrap">
 
-</div>
+            <table>
 
-  <!-- SHOPS -->
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Shop</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Unit</th>
+                    </tr>
+                </thead>
 
-<section id="shops" class="panel">
+                <tbody id="productsTable">
 
-<h2>🏪 Shop Management</h2>
+                    <tr>
+                        <td colspan="5" class="loading">
+                            Products loading...
+                        </td>
+                    </tr>
 
-<p class="panel-subtitle">
-Registered hardware shops ki information.
-</p>
+                </tbody>
 
-<div id="shopError" class="error"></div>
+            </table>
 
-<input
-type="text"
-id="shopSearch"
-class="search-box"
-placeholder="Shop name, owner, city search karein..."
-oninput="filterShops()"
->
+        </div>
 
-<div class="table-wrap">
+    </section>
 
-<table>
 
-<thead>
+    <!-- PRODUCTS -->
 
-<tr>
-<th>Shop</th>
-<th>Owner</th>
-<th>Mobile</th>
-<th>City</th>
-<th>Products</th>
-<th>Plan</th>
-</tr>
+    <section id="products" class="panel hidden">
 
-</thead>
+        <h2>📦 Products</h2>
 
-<tbody id="shopsTable">
+        <p class="panel-subtitle">
+            Shops ke listed products ka overview.
+        </p>
 
-<tr>
-<td colspan="6" class="loading">
-Shops loading...
-</td>
-</tr>
+        <div class="table-wrap">
 
-</tbody>
+            <table>
 
-</table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Shop</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Unit</th>
+                    </tr>
+                </thead>
 
-</div>
+                <tbody id="productsTable">
 
-</section>
+                    <tr>
+                        <td colspan="5" class="loading">
+                            Products loading...
+                        </td>
+                    </tr>
 
+                </tbody>
 
-<!-- PRODUCTS -->
+            </table>
 
-<section id="products" class="panel hidden">
+        </div>
 
-<h2>📦 Products</h2>
+    </section>
 
-<p class="panel-subtitle">
-Shops ke listed products ka overview.
-</p>
 
-<div class="table-wrap">
+    <!-- SUBSCRIPTIONS -->
 
-<table>
+    <section id="subscriptions" class="panel hidden">
 
-<thead>
+        <h2>💳 Subscription Management</h2>
 
-<tr>
-<th>Product</th>
-<th>Shop</th>
-<th>Category</th>
-<th>Price</th>
-<th>Unit</th>
-</tr>
+        <p class="panel-subtitle">
+            Free, Pro aur Premium plans manage karein.
+        </p>
 
-</thead>
+        <div class="plan-grid">
 
-<tbody id="productsTable">
+            <div class="plan">
 
-<tr>
-<td colspan="5" class="loading">
-Products loading...
-</td>
-</tr>
+                <h3>🆓 Free</h3>
 
-</tbody>
+                <div class="price">
+                    ₹0 <small>/month</small>
+                </div>
 
-</table>
+                <p>
+                    Basic shop listing aur product visibility.
+                </p>
 
-</div>
+                <button onclick="planMessage('Free')">
+                    Current Plan
+                </button>
 
-</section>
+            </div>
 
 
-<!-- SUBSCRIPTIONS -->
+            <div class="plan">
 
-<section id="subscriptions" class="panel hidden">
+                <h3>⭐ Pro</h3>
 
-<h2>💳 Subscription Management</h2>
+                <div class="price">
+                    ₹299 <small>/month</small>
+                </div>
 
-<p class="panel-subtitle">
-Free, Pro aur Premium plans manage karein.
-</p>
+                <p>
+                    Better visibility aur extra products.
+                </p>
 
-<div class="plan-grid">
+                <button onclick="planMessage('Pro')">
+                    Manage Plan
+                </button>
 
-<div class="plan">
+            </div>
 
-<h3>🆓 Free</h3>
 
-<div class="price">
-₹0 <small>/month</small>
-</div>
+            <div class="plan">
 
-<p>
-Basic shop listing aur product visibility.
-</p>
+                <h3>💎 Premium</h3>
 
-<button onclick="planMessage('Free')">
-Current Plan
-</button>
+                <div class="price">
+                    ₹599 <small>/month</small>
+                </div>
 
-</div>
+                <p>
+                    Priority visibility aur advanced features.
+                </p>
 
-  <div class="plan">
+                <button onclick="planMessage('Premium')">
+                    Manage Plan
+                </button>
 
-<h3>⭐ Pro</h3>
+            </div>
 
-<div class="price">
-₹299 <small>/month</small>
-</div>
+        </div>
 
-<p>
-Better visibility aur extra products.
-</p>
+    </section>
 
-<button onclick="planMessage('Pro')">
-Manage Plan
-</button>
 
-</div>
+    <!-- ACTIVITY -->
 
+    <section id="activity" class="panel hidden">
 
-<div class="plan">
+        <h2>📊 Activity</h2>
 
-<h3>💎 Premium</h3>
+        <p class="panel-subtitle">
+            Admin panel activity overview.
+        </p>
 
-<div class="price">
-₹599 <small>/month</small>
-</div>
+        <div class="activity">
 
-<p>
-Priority visibility aur advanced features.
-</p>
+            <div class="activity-item">
+                ✅ Admin login system successfully connected.
+            </div>
 
-<button onclick="planMessage('Premium')">
-Manage Plan
-</button>
+            <div class="activity-item">
+                🏪 Shop management system ready.
+            </div>
 
-</div>
+            <div class="activity-item">
+                📦 Product management system ready.
+            </div>
 
-</div>
+            <div class="activity-item">
+                💳 Subscription management interface ready.
+            </div>
 
-</section>
+        </div>
 
-
-<!-- ACTIVITY -->
-
-<section id="activity" class="panel hidden">
-
-<h2>📊 Activity</h2>
-
-<p class="panel-subtitle">
-Admin panel activity overview.
-</p>
-
-<div class="activity">
-
-<div class="activity-item">
-✅ Admin login system successfully connected.
-</div>
-
-<div class="activity-item">
-🏪 Shop management system ready.
-</div>
-
-<div class="activity-item">
-📦 Product management system ready.
-</div>
-
-<div class="activity-item">
-💳 Subscription management interface ready.
-</div>
-
-</div>
-
-</section>
+    </section>
 
 </main>
-<!-- SHOP DETAILS MODAL -->
 
-<div id="shopModal"
-style="
-display:none;
-position:fixed;
-inset:0;
-background:#0008;
-z-index:9999;
-padding:20px;
-overflow:auto;
-">
+    <!-- SHOP DETAILS MODAL -->
 
-<div style="
-background:white;
-max-width:700px;
-margin:40px auto;
-border-radius:15px;
-padding:25px;
-position:relative;
-">
+<div id="shopModal" class="modal">
 
-<button
-onclick="closeShopModal()"
-style="
-position:absolute;
-right:15px;
-top:15px;
-border:0;
-background:#ef4444;
-color:white;
-width:35px;
-height:35px;
-border-radius:50%;
-font-size:18px;
-cursor:pointer;
-">
-×
-</button>
+    <div class="modal-box">
 
-<h2 id="modalShopName">
-🏪 Shop Details
-</h2>
+        <button
+            class="close-btn"
+            onclick="closeShopModal()">
+            ×
+        </button>
 
-<div id="shopDetails"
-style="
-margin-top:20px;
-line-height:1.8;
-">
-</div>
+        <h2 id="modalShopName">
+            🏪 Shop Details
+        </h2>
 
-<h3 style="margin-top:20px;">
-📦 Products
-</h3>
+        <div id="shopDetails"
+             style="margin-top:20px;line-height:1.8;">
+        </div>
 
-<div style="overflow-x:auto;">
+        <h3 style="margin-top:20px;">
+            📦 Products
+        </h3>
 
-<table style="
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-">
+        <div style="overflow-x:auto;">
 
-<thead>
+            <table style="
+                width:100%;
+                border-collapse:collapse;
+                margin-top:10px;
+            ">
 
-<tr>
-<th style="padding:10px;text-align:left;">
-Product
-</th>
+                <thead>
 
-<th style="padding:10px;text-align:left;">
-Category
-</th>
+                    <tr>
 
-<th style="padding:10px;text-align:left;">
-Price
-</th>
+                        <th style="
+                            padding:10px;
+                            text-align:left;
+                        ">
+                            Product
+                        </th>
 
-<th style="padding:10px;text-align:left;">
-Unit
-</th>
-</tr>
+                        <th style="
+                            padding:10px;
+                            text-align:left;
+                        ">
+                            Category
+                        </th>
 
-</thead>
+                        <th style="
+                            padding:10px;
+                            text-align:left;
+                        ">
+                            Price
+                        </th>
 
-<tbody id="modalProducts">
-</tbody>
+                        <th style="
+                            padding:10px;
+                            text-align:left;
+                        ">
+                            Unit
+                        </th>
 
-</table>
+                    </tr>
+
+                </thead>
+
+                <tbody id="modalProducts">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </div>
 
-</div>
 
-</div>
 <!-- EDIT SHOP MODAL -->
 
-<div id="editShopModal"
-style="
-display:none;
-position:fixed;
-inset:0;
-background:#0008;
-z-index:10000;
-padding:20px;
-overflow:auto;
-">
+<div id="editShopModal" class="modal">
 
-<div style="
-background:white;
-max-width:600px;
-margin:40px auto;
-padding:25px;
-border-radius:15px;
-">
+    <div class="modal-box"
+         style="max-width:600px;">
 
-<h2>✏️ Edit Shop</h2>
+        <h2>✏️ Edit Shop</h2>
 
-<input id="editShopName"
-placeholder="Shop Name"
-style="width:100%;padding:12px;margin:8px 0;">
+        <input
+            id="editShopName"
+            class="edit-input"
+            placeholder="Shop Name">
 
-<input id="editOwnerName"
-placeholder="Owner Name"
-style="width:100%;padding:12px;margin:8px 0;">
+        <input
+            id="editOwnerName"
+            class="edit-input"
+            placeholder="Owner Name">
 
-<input id="editMobile"
-placeholder="Mobile"
-style="width:100%;padding:12px;margin:8px 0;">
+        <input
+            id="editMobile"
+            class="edit-input"
+            placeholder="Mobile">
 
-<input id="editEmail"
-placeholder="Email"
-style="width:100%;padding:12px;margin:8px 0;">
+        <input
+            id="editEmail"
+            class="edit-input"
+            placeholder="Email">
 
-<input id="editCity"
-placeholder="City"
-style="width:100%;padding:12px;margin:8px 0;">
+        <input
+            id="editCity"
+            class="edit-input"
+            placeholder="City">
 
-<input id="editAddress"
-placeholder="Address"
-style="width:100%;padding:12px;margin:8px 0;">
+        <input
+            id="editAddress"
+            class="edit-input"
+            placeholder="Address">
 
-<button onclick="saveShopEdit()"
-style="
-background:#20c997;
-color:white;
-border:0;
-padding:12px 20px;
-border-radius:8px;
-margin-top:10px;">
-💾 Save Changes
-</button>
+        <button
+            class="save-btn"
+            onclick="saveShopEdit()">
+            💾 Save Changes
+        </button>
 
-<button onclick="closeEditShop()"
-style="
-background:#ef4444;
-color:white;
-border:0;
-padding:12px 20px;
-border-radius:8px;
-margin-left:8px;">
-Cancel
-</button>
+        <button
+            class="cancel-btn"
+            onclick="closeEditShop()">
+            Cancel
+        </button>
+
+    </div>
 
 </div>
-</div>
-  
-<script>
+
+    <script>
 
 const API =
-"https://hardwarebhav-backend-uqj7.onrender.com";
+    "https://hardwarebhav-backend-uqj7.onrender.com";
 
 let allShops = [];
 let editingShopId = null;
 
-function editShop(shopId){
 
-const shop = allShops.find(function(s){
-return s._id === shopId;
-});
-
-if(!shop){
-alert("Shop nahi mili.");
-return;
-}
-
-editingShopId = shopId;
-
-document.getElementById("editShopName").value =
-shop.shopName || "";
-
-document.getElementById("editOwnerName").value =
-shop.ownerName || "";
-
-document.getElementById("editMobile").value =
-shop.mobile || "";
-
-document.getElementById("editEmail").value =
-shop.email || "";
-
-document.getElementById("editCity").value =
-shop.city || "";
-
-document.getElementById("editAddress").value =
-shop.address || "";
-
-document.getElementById("editShopModal")
-.style.display = "block";
-  }
-async function saveShopEdit(){
-
-    if(!editingShopId){
-        alert("Shop select nahi hai.");
-        return;
-    }
-
-    const updatedShop = {
-        shopName:
-        document.getElementById("editShopName").value.trim(),
-
-        ownerName:
-        document.getElementById("editOwnerName").value.trim(),
-
-        mobile:
-        document.getElementById("editMobile").value.trim(),
-
-        email:
-        document.getElementById("editEmail").value.trim(),
-
-        city:
-        document.getElementById("editCity").value.trim(),
-
-        address:
-        document.getElementById("editAddress").value.trim()
-    };
-
-    try{
-
-        const response = await fetch(
-            API + "/api/shops/" + editingShopId,
-            {
-                method:"PUT",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body:JSON.stringify(updatedShop)
-            }
-        );
-
-        const data = await response.json();
-
-        if(!response.ok){
-            throw new Error(
-                data.message || "Shop update failed."
-            );
-        }
-
-        alert("✅ Shop details successfully updated!");
-
-        closeEditShop();
-
-        loadShops();
-function closeEditShop(){
-
-    document.getElementById("editShopModal")
-    .style.display = "none";
-
-    editingShopId = null;
-  }
-    }catch(error){
-
-        console.error("EDIT SHOP ERROR:",error);
-
-        alert(
-            "❌ Shop update nahi hua.\n" +
-            error.message
-        );
-    }
-  }
 /* ADMIN LOGIN CHECK */
 
 const adminId =
-localStorage.getItem("adminId");
+    localStorage.getItem("adminId");
 
 if(!adminId){
 
-window.location.href =
-"Admin.html";
-
+    window.location.href =
+        "Admin.html";
 }
 
 
@@ -923,76 +835,1045 @@ window.location.href =
 
 function logoutAdmin(){
 
-localStorage.removeItem("adminId");
+    localStorage.removeItem("adminId");
 
-window.location.href =
-"Admin.html";
-
+    window.location.href =
+        "Admin.html";
 }
 
 
 /* TABS */
 
-function showTab(tabId,button){
+function showTab(tabId, button){
 
-document
-.querySelectorAll(".panel")
-.forEach(function(panel){
+    document
+        .querySelectorAll(".panel")
+        .forEach(function(panel){
 
-panel.classList.add("hidden");
+            panel.classList.add("hidden");
 
-});
+        });
 
-document
-.getElementById(tabId)
-.classList.remove("hidden");
+    document
+        .getElementById(tabId)
+        .classList.remove("hidden");
 
-document
-.querySelectorAll(".tab-btn")
-.forEach(function(btn){
+    document
+        .querySelectorAll(".tab-btn")
+        .forEach(function(btn){
 
-btn.classList.remove("active");
+            btn.classList.remove("active");
 
-});
+        });
 
-button.classList.add("active");
+    button.classList.add("active");
 
 }
-async function disableShop(shopId){
 
-    const ok = confirm(
-        "Kya aap is shop ko Disable karna chahte hain?"
-    );
 
-    if(!ok){
+/* LOAD SHOPS */
+
+async function loadShops(){
+
+    const table =
+        document.getElementById("shopsTable");
+
+    const errorBox =
+        document.getElementById("shopError");
+
+    errorBox.style.display = "none";
+
+    table.innerHTML = `
+        <tr>
+            <td colspan="6" class="loading">
+                Shops loading...
+            </td>
+        </tr>
+    `;
+
+    try{
+
+        const response =
+            await fetch(API + "/api/shops");
+
+        const data =
+            await response.json();
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Shops load nahi hue."
+            );
+        }
+
+        allShops =
+            Array.isArray(data)
+            ? data
+            : (data.shops || []);
+
+        renderShops(allShops);
+
+        updateStatistics(allShops);
+
+        renderProducts(allShops);
+
+    }catch(error){
+
+        console.error(
+            "SHOP LOAD ERROR:",
+            error
+        );
+
+        errorBox.style.display = "block";
+
+        errorBox.innerText =
+            "Shops load nahi ho pa rahe: " +
+            error.message;
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="6" class="loading">
+                    Shops load nahi hue.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+        function renderShops(shops){
+
+    const table =
+        document.getElementById("shopsTable");
+
+    if(!shops.length){
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="6" class="loading">
+                    Abhi koi shop registered nahi hai.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    table.innerHTML = "";
+
+    shops.forEach(function(shop){
+
+        const products =
+            Array.isArray(shop.products)
+            ? shop.products
+            : [];
+
+        const plan =
+            shop.plan ||
+            shop.subscriptionPlan ||
+            "Free";
+
+        let planClass = "free";
+
+        if(String(plan)
+            .toLowerCase()
+            .includes("premium")){
+
+            planClass = "premium";
+
+        }else if(String(plan)
+            .toLowerCase()
+            .includes("pro")){
+
+            planClass = "pro";
+        }
+
+        const isActive =
+            shop.active !== false;
+
+        const actionButton =
+            isActive
+            ? `
+                <button
+                    class="action-btn disable-btn"
+                    onclick="disableShop('${shop._id}')">
+                    🚫 Disable
+                </button>
+              `
+            : `
+                <button
+                    class="action-btn enable-btn"
+                    onclick="enableShop('${shop._id}')">
+                    ✅ Enable
+                </button>
+              `;
+
+        const row =
+            document.createElement("tr");
+
+        row.innerHTML = `
+
+            <td>
+                <strong>
+                    ${escapeHtml(
+                        shop.shopName || "-"
+                    )}
+                </strong>
+
+                <br>
+
+                <button
+                    class="action-btn view-btn"
+                    onclick="viewShop('${shop._id}')">
+                    👁️ View
+                </button>
+
+                <button
+                    class="action-btn edit-btn"
+                    onclick="editShop('${shop._id}')">
+                    ✏️ Edit
+                </button>
+
+                ${actionButton}
+
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    shop.ownerName || "-"
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    shop.mobile || "-"
+                )}
+            </td>
+
+            <td>
+                ${escapeHtml(
+                    shop.city || "-"
+                )}
+            </td>
+
+            <td>
+                ${products.length}
+            </td>
+
+            <td>
+                <span class="status ${planClass}">
+                    ${escapeHtml(plan)}
+                </span>
+            </td>
+
+        `;
+
+        table.appendChild(row);
+
+    });
+
+        }
+
+
+        function escapeHtml(value){
+
+    if(value === null ||
+       value === undefined){
+
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* UPDATE STATISTICS */
+
+function updateStatistics(shops){
+
+    const total =
+        shops.length;
+
+    let free = 0;
+    let paid = 0;
+    let products = 0;
+
+    shops.forEach(function(shop){
+
+        const plan =
+            String(
+                shop.plan ||
+                shop.subscriptionPlan ||
+                "Free"
+            ).toLowerCase();
+
+        if(
+            plan === "free" ||
+            plan === ""
+        ){
+
+            free++;
+
+        }else{
+
+            paid++;
+
+        }
+
+        if(
+            Array.isArray(shop.products)
+        ){
+
+            products +=
+                shop.products.length;
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "totalShops"
+    ).innerText = total;
+
+
+    document.getElementById(
+        "freeShops"
+    ).innerText = free;
+
+
+    document.getElementById(
+        "paidShops"
+    ).innerText = paid;
+
+
+    document.getElementById(
+        "totalProducts"
+    ).innerText = products;
+
+}
+
+
+/* SHOP SEARCH */
+
+function filterShops(){
+
+    const input =
+        document.getElementById(
+            "shopSearch"
+        );
+
+    const search =
+        input.value
+            .toLowerCase()
+            .trim();
+
+    if(!search){
+
+        renderShops(allShops);
+
+        return;
+    }
+
+    const filtered =
+        allShops.filter(function(shop){
+
+            const text = (
+
+                (shop.shopName || "") +
+                " " +
+                (shop.ownerName || "") +
+                " " +
+                (shop.city || "") +
+                " " +
+                (shop.mobile || "")
+
+            ).toLowerCase();
+
+            return text.includes(search);
+
+        });
+
+    renderShops(filtered);
+
+}
+
+
+/* LOAD PRODUCTS */
+
+function renderProducts(shops){
+
+    const table =
+        document.getElementById(
+            "productsTable"
+        );
+
+    let rows = [];
+
+    shops.forEach(function(shop){
+
+        const products =
+            Array.isArray(shop.products)
+            ? shop.products
+            : [];
+
+        products.forEach(function(product){
+
+            rows.push({
+
+                product: product.name || "-",
+
+                shop:
+                    shop.shopName || "-",
+
+                category:
+                    product.category || "-",
+
+                price:
+                    product.price || "-",
+
+                unit:
+                    product.unit || "-"
+
+            });
+
+        });
+
+    });
+
+    if(!rows.length){
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5" class="loading">
+                    Abhi koi product available nahi hai.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+        function escapeHtml(value){
+
+    if(value === null ||
+       value === undefined){
+
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* UPDATE STATISTICS */
+
+function updateStatistics(shops){
+
+    const total =
+        shops.length;
+
+    let free = 0;
+    let paid = 0;
+    let products = 0;
+
+    shops.forEach(function(shop){
+
+        const plan =
+            String(
+                shop.plan ||
+                shop.subscriptionPlan ||
+                "Free"
+            ).toLowerCase();
+
+        if(
+            plan === "free" ||
+            plan === ""
+        ){
+
+            free++;
+
+        }else{
+
+            paid++;
+
+        }
+
+        if(
+            Array.isArray(shop.products)
+        ){
+
+            products +=
+                shop.products.length;
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "totalShops"
+    ).innerText = total;
+
+
+    document.getElementById(
+        "freeShops"
+    ).innerText = free;
+
+
+    document.getElementById(
+        "paidShops"
+    ).innerText = paid;
+
+
+    document.getElementById(
+        "totalProducts"
+    ).innerText = products;
+
+}
+
+
+/* SHOP SEARCH */
+
+function filterShops(){
+
+    const input =
+        document.getElementById(
+            "shopSearch"
+        );
+
+    const search =
+        input.value
+            .toLowerCase()
+            .trim();
+
+    if(!search){
+
+        renderShops(allShops);
+
+        return;
+    }
+
+    const filtered =
+        allShops.filter(function(shop){
+
+            const text = (
+
+                (shop.shopName || "") +
+                " " +
+                (shop.ownerName || "") +
+                " " +
+                (shop.city || "") +
+                " " +
+                (shop.mobile || "")
+
+            ).toLowerCase();
+
+            return text.includes(search);
+
+        });
+
+    renderShops(filtered);
+
+}
+
+
+/* LOAD PRODUCTS */
+
+function renderProducts(shops){
+
+    const table =
+        document.getElementById(
+            "productsTable"
+        );
+
+    let rows = [];
+
+    shops.forEach(function(shop){
+
+        const products =
+            Array.isArray(shop.products)
+            ? shop.products
+            : [];
+
+        products.forEach(function(product){
+
+            rows.push({
+
+                product: product.name || "-",
+
+                shop:
+                    shop.shopName || "-",
+
+                category:
+                    product.category || "-",
+
+                price:
+                    product.price || "-",
+
+                unit:
+                    product.unit || "-"
+
+            });
+
+        });
+
+    });
+
+    if(!rows.length){
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5" class="loading">
+                    Abhi koi product available nahi hai.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+        rows.forEach(function(item){
+
+        const row =
+            document.createElement("tr");
+
+        row.innerHTML = `
+
+            <td>
+                ${escapeHtml(item.product)}
+            </td>
+
+            <td>
+                ${escapeHtml(item.shop)}
+            </td>
+
+            <td>
+                ${escapeHtml(item.category)}
+            </td>
+
+            <td>
+                ₹${escapeHtml(item.price)}
+            </td>
+
+            <td>
+                ${escapeHtml(item.unit)}
+            </td>
+
+        `;
+
+        table.appendChild(row);
+
+    });
+
+}
+
+
+/* VIEW SHOP */
+
+function viewShop(id){
+
+    const shop =
+        allShops.find(function(item){
+
+            return String(item._id) ===
+                   String(id);
+
+        });
+
+    if(!shop){
+
+        alert("Shop information nahi mili.");
+
+        return;
+    }
+
+    document.getElementById(
+        "modalShopName"
+    ).innerText =
+        "🏪 " +
+        (shop.shopName || "Shop Details");
+
+
+    const details =
+        document.getElementById(
+            "shopDetails"
+        );
+
+    details.innerHTML = `
+
+        <p>
+            <strong>Owner:</strong>
+            ${escapeHtml(
+                shop.ownerName || "-"
+            )}
+        </p>
+
+        <p>
+            <strong>Mobile:</strong>
+            ${escapeHtml(
+                shop.mobile || "-"
+            )}
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            ${escapeHtml(
+                shop.email || "-"
+            )}
+        </p>
+
+        <p>
+            <strong>City:</strong>
+            ${escapeHtml(
+                shop.city || "-"
+            )}
+        </p>
+
+        <p>
+            <strong>Address:</strong>
+            ${escapeHtml(
+                shop.address || "-"
+            )}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            ${
+                shop.active === false
+                ? "🚫 Disabled"
+                : "✅ Active"
+            }
+        </p>
+
+    `;
+
+
+    const productTable =
+        document.getElementById(
+            "modalProducts"
+        );
+
+    const products =
+        Array.isArray(shop.products)
+        ? shop.products
+        : [];
+
+
+    productTable.innerHTML = "";
+
+
+    if(!products.length){
+
+        productTable.innerHTML = `
+            <tr>
+                <td colspan="4"
+                    style="padding:12px;">
+                    No products available.
+                </td>
+            </tr>
+        `;
+
+    }else{
+
+        products.forEach(function(product){
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+
+                <td style="padding:10px;">
+                    ${escapeHtml(
+                        product.name || "-"
+                    )}
+                </td>
+
+                <td style="padding:10px;">
+                    ${escapeHtml(
+                        product.category || "-"
+                    )}
+                </td>
+
+                <td style="padding:10px;">
+                    ₹${escapeHtml(
+                        product.price || "-"
+                    )}
+                </td>
+
+                <td style="padding:10px;">
+                    ${escapeHtml(
+                        product.unit || "-"
+                    )}
+                </td>
+
+            `;
+
+            productTable.appendChild(row);
+
+        });
+
+    }
+
+    document.getElementById(
+        "shopModal"
+    ).style.display = "block";
+
+}
+
+    function editShop(id){
+
+    const shop =
+        allShops.find(function(item){
+
+            return String(item._id) ===
+                   String(id);
+
+        });
+
+    if(!shop){
+
+        alert("Shop information nahi mili.");
+
+        return;
+    }
+
+    editingShopId = shop._id;
+
+
+    document.getElementById(
+        "editShopName"
+    ).value =
+        shop.shopName || "";
+
+
+    document.getElementById(
+        "editOwnerName"
+    ).value =
+        shop.ownerName || "";
+
+
+    document.getElementById(
+        "editMobile"
+    ).value =
+        shop.mobile || "";
+
+
+    document.getElementById(
+        "editEmail"
+    ).value =
+        shop.email || "";
+
+
+    document.getElementById(
+        "editCity"
+    ).value =
+        shop.city || "";
+
+
+    document.getElementById(
+        "editAddress"
+    ).value =
+        shop.address || "";
+
+
+    document.getElementById(
+        "editShopModal"
+    ).style.display = "block";
+
+}
+
+
+/* SAVE SHOP EDIT */
+
+async function saveShopEdit(){
+
+    if(!editingShopId){
+
+        alert("Shop select nahi hai.");
+
+        return;
+    }
+
+    const shopName =
+        document.getElementById(
+            "editShopName"
+        ).value.trim();
+
+    const ownerName =
+        document.getElementById(
+            "editOwnerName"
+        ).value.trim();
+
+    const mobile =
+        document.getElementById(
+            "editMobile"
+        ).value.trim();
+
+    const email =
+        document.getElementById(
+            "editEmail"
+        ).value.trim();
+
+    const city =
+        document.getElementById(
+            "editCity"
+        ).value.trim();
+
+    const address =
+        document.getElementById(
+            "editAddress"
+        ).value.trim();
+
+    if(!shopName){
+
+        alert("Shop name required hai.");
+
         return;
     }
 
     try{
-        const response = await fetch(
-            API + "/api/shops/" + shopId,
-            {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    active: false
-                })
-            }
-        );
 
-        const data = await response.json();
+        const response =
+            await fetch(
+                API +
+                "/api/shops/" +
+                editingShopId,
+                {
+                    method:"PUT",
+
+                    headers:{
+                        "Content-Type":
+                        "application/json"
+                    },
+
+                    body:JSON.stringify({
+
+                        shopName,
+                        ownerName,
+                        mobile,
+                        email,
+                        city,
+                        address
+
+                    })
+                }
+            );
+
+        const data =
+            await response.json();
 
         if(!response.ok){
+
             throw new Error(
-                data.message || "Disable failed"
+                data.message ||
+                "Shop update nahi hui."
             );
         }
 
-        alert("🚫 Shop successfully disabled!");
+        alert(
+            "✅ Shop successfully update ho gayi."
+        );
 
-        loadShops();
+        closeEditShop();
+
+        await loadShops();
+
+    }catch(error){
+
+        console.error(
+            "SHOP UPDATE ERROR:",
+            error
+        );
+
+        alert(
+            "❌ Shop update failed: " +
+            error.message
+        );
+
+    }
+
+        }
+
+        function closeShopModal(){
+
+    document.getElementById(
+        "shopModal"
+    ).style.display = "none";
+
+}
+
+
+/* CLOSE EDIT MODAL */
+
+function closeEditShop(){
+
+    document.getElementById(
+        "editShopModal"
+    ).style.display = "none";
+
+    editingShopId = null;
+
+}
+
+
+/* DISABLE SHOP */
+
+async function disableShop(id){
+
+    const confirmDisable =
+        confirm(
+            "Kya aap is shop ko disable karna chahte hain?"
+        );
+
+    if(!confirmDisable){
+
+        return;
+    }
+
+    try{
+
+        const response =
+            await fetch(
+                API +
+                "/api/shops/" +
+                id +
+                "/disable",
+                {
+                    method:"PUT"
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if(!response.ok){
+
+            throw new Error(
+                data.message ||
+                "Shop disable nahi hui."
+            );
+        }
+
+        alert(
+            "🚫 Shop successfully disable ho gayi."
+        );
+
+        await loadShops();
 
     }catch(error){
 
@@ -1002,534 +1883,160 @@ async function disableShop(shopId){
         );
 
         alert(
-            "❌ Shop disable nahi hui.\n" +
+            "❌ Shop disable failed: " +
             error.message
         );
+
     }
-  }
-  /* LOAD SHOPS */
-
-async function loadShops(){
-
-const table =
-document.getElementById("shopsTable");
-
-try{
-
-const response =
-await fetch(API + "/api/shops");
-
-const data =
-await response.json();
-
-if(!response.ok){
-
-throw new Error(
-data.message ||
-"Shops load nahi hue."
-);
-
-}
-
-allShops =
-Array.isArray(data)
-? data
-: (data.shops || []);
-
-renderShops(allShops);
-
-updateStatistics(allShops);
-
-renderProducts(allShops);
-
-}catch(error){
-
-console.error(
-"SHOP LOAD ERROR:",
-error
-);
-
-document
-.getElementById("shopError")
-.style.display = "block";
-
-document
-.getElementById("shopError")
-.innerText =
-"Shops load nahi ho pa rahe: " +
-error.message;
-
-table.innerHTML =
-`<tr>
-<td colspan="6" class="loading">
-Shops load nahi hue.
-</td>
-</tr>`;
-
-}
 
 }
 
 
-/* RENDER SHOPS */
+/* ENABLE SHOP */
 
-function renderShops(shops){
+async function enableShop(id){
 
-const table =
-document.getElementById("shopsTable");
+    const confirmEnable =
+        confirm(
+            "Kya aap is shop ko enable karna chahte hain?"
+        );
 
-if(!shops.length){
+    if(!confirmEnable){
 
-table.innerHTML =
-`<tr>
-<td colspan="6" class="loading">
-Abhi koi shop registered nahi hai.
-</td>
-</tr>`;
-
-return;
-}
-
-table.innerHTML = "";
-
-shops.forEach(function(shop){
-
-const products =
-Array.isArray(shop.products)
-? shop.products
-: [];
-
-const plan =
-shop.plan ||
-shop.subscriptionPlan ||
-"Free";
-
-let planClass = "free";
-
-if(String(plan).toLowerCase()
-.includes("premium")){
-
-planClass = "premium";
-
-}else if(String(plan).toLowerCase()
-.includes("pro")){
-
-planClass = "pro";
-}
-
-const row =
-document.createElement("tr");
-
-row.innerHTML = `
-
-<td>
-<strong>
-${escapeHtml(shop.shopName || "-")}
-</strong>
-<br>
-<button
-onclick="viewShop('${shop._id}')"
-style="
-margin-top:6px;
-padding:5px 10px;
-border:0;
-border-radius:6px;
-background:#20c997;
-color:white;
-cursor:pointer;
-">
-👁️ View
-</button>
-</td>
-<button
-onclick="editShop('${shop._id}')"
-style="
-margin-top:6px;
-margin-left:5px;
-padding:5px 10px;
-border:0;
-border-radius:6px;
-background:#175cd3;
-color:white;
-cursor:pointer;
-">
-✏️ Edit
-</button>
-<button
-onclick="disableShop('${shop._id}')"
-style="
-margin-top:6px;
-margin-left:5px;
-padding:5px 10px;
-border:0;
-border-radius:6px;
-background:#ef4444;
-color:white;
-cursor:pointer;">
-🚫 Disable
-</button>
-<td>
-${escapeHtml(shop.ownerName || "-")}
-</td>
-
-<td>
-${escapeHtml(shop.mobile || "-")}
-</td>
-
-<td>
-${escapeHtml(shop.city || "-")}
-</td>
-
-<td>
-${products.length}
-</td>
-
-<td>
-<span class="status ${planClass}">
-${escapeHtml(plan)}
-</span>
-</td>
-
-`;
-
-table.appendChild(row);
-
-});
-
-  }
-/* SEARCH SHOPS */
-
-function filterShops(){
-
-    const search =
-        document
-        .getElementById("shopSearch")
-        .value
-        .toLowerCase()
-        .trim();
-
-    const filtered =
-        allShops.filter(function(shop){
-
-            return (
-
-                String(
-                    shop.shopName || ""
-                )
-                .toLowerCase()
-                .includes(search)
-
-                ||
-
-                String(
-                    shop.ownerName || ""
-                )
-                .toLowerCase()
-                .includes(search)
-
-                ||
-
-                String(
-                    shop.city || ""
-                )
-                .toLowerCase()
-                .includes(search)
-
-                ||
-
-                String(
-                    shop.mobile || ""
-                )
-                .toLowerCase()
-                .includes(search)
-
-            );
-
-        });
-
-    renderShops(filtered);
-
-  }
-/* VIEW SHOP */
-  
-function viewShop(shopId){
-
-    const shop =
-        allShops.find(function(s){
-            return s._id === shopId;
-        });
-
-    if(!shop){
-        alert("Shop details nahi mili.");
         return;
     }
 
-    document.getElementById("modalShopName")
-    .innerText =
-        "🏪 " + (shop.shopName || "Shop Details");
+    try{
 
-    document.getElementById("shopDetails")
-    .innerHTML = `
+        const response =
+            await fetch(
+                API +
+                "/api/shops/" +
+                id +
+                "/enable",
+                {
+                    method:"PUT"
+                }
+            );
 
-        <p>👤 <b>Owner:</b>
-        ${escapeHtml(shop.ownerName || "-")}</p>
+        const data =
+            await response.json();
 
-        <p>📱 <b>Mobile:</b>
-        ${escapeHtml(shop.mobile || "-")}</p>
+        if(!response.ok){
 
-        <p>📧 <b>Email:</b>
-        ${escapeHtml(shop.email || "-")}</p>
+            throw new Error(
+                data.message ||
+                "Shop enable nahi hui."
+            );
+        }
 
-        <p>🏙️ <b>City:</b>
-        ${escapeHtml(shop.city || "-")}</p>
+        alert(
+            "✅ Shop successfully enable ho gayi."
+        );
 
-        <p>📍 <b>Address:</b>
-        ${escapeHtml(shop.address || "-")}</p>
+        await loadShops();
 
-        <p>💳 <b>Plan:</b>
-        ${escapeHtml(
-            shop.plan ||
-            shop.subscriptionPlan ||
-            "Free"
-        )}</p>
+    }catch(error){
 
-    `;
+        console.error(
+            "ENABLE SHOP ERROR:",
+            error
+        );
 
-    const products =
-        Array.isArray(shop.products)
-        ? shop.products
-        : [];
-
-    const productTable =
-        document.getElementById("modalProducts");
-
-    productTable.innerHTML = "";
-
-    if(!products.length){
-
-        productTable.innerHTML = `
-        <tr>
-        <td colspan="4"
-        style="padding:15px;text-align:center;">
-        No products available
-        </td>
-        </tr>`;
-
-    }else{
-
-        products.forEach(function(product){
-
-            productTable.innerHTML += `
-            <tr>
-
-            <td style="padding:10px;">
-            ${escapeHtml(product.name || "-")}
-            </td>
-
-            <td style="padding:10px;">
-            ${escapeHtml(
-                product.category || "Other"
-            )}
-            </td>
-
-            <td style="padding:10px;">
-            ₹${escapeHtml(
-                product.price ?? "-"
-            )}
-            </td>
-
-            <td style="padding:10px;">
-            ${escapeHtml(
-                product.unit || "Piece"
-            )}
-            </td>
-            </tr>`;
-});
+        alert(
+            "❌ Shop enable failed: " +
+            error.message
+        );
 
     }
 
-    document.getElementById("shopModal")
-    .style.display = "block";
-  }
-
-  function closeShopModal(){
-
-    document.getElementById("shopModal")
-    .style.display = "none";
-
 }
 
-document.getElementById("shopModal")
-.addEventListener("click",function(event){
 
-    if(event.target === this){
-        closeShopModal();
+/* CLOSE MODAL ON OUTSIDE CLICK */
+
+window.addEventListener(
+    "click",
+    function(event){
+
+        const shopModal =
+            document.getElementById(
+                "shopModal"
+            );
+
+        const editModal =
+            document.getElementById(
+                "editShopModal"
+            );
+
+        if(event.target === shopModal){
+
+            closeShopModal();
+
+        }
+
+        if(event.target === editModal){
+
+            closeEditShop();
+
+        }
+
     }
-
-});
-/* STATISTICS */
-
-function updateStatistics(shops){
-
-let totalProducts = 0;
-let free = 0;
-let paid = 0;
-
-shops.forEach(function(shop){
-
-const products =
-Array.isArray(shop.products)
-? shop.products
-: [];
-
-totalProducts += products.length;
-
-const plan =
-String(
-shop.plan ||
-shop.subscriptionPlan ||
-"Free"
-).toLowerCase();
-
-if(
-plan === "free" ||
-plan === ""
-){
-
-free++;
-
-}else{
-
-paid++;
-
-}
-
-});
-
-document.getElementById("totalShops")
-.innerText = shops.length;
-
-document.getElementById("totalProducts")
-.innerText =
-totalProducts;
-
-document.getElementById("freeShops")
-.innerText = free;
-
-document.getElementById("paidShops")
-.innerText = paid;
-
-}
-
-
-/* PRODUCTS */
-
-function renderProducts(shops){
-
-const table =
-document.getElementById(
-"productsTable"
 );
 
-let rows = "";
+        function planMessage(plan){
 
-shops.forEach(function(shop){
-
-const products =
-Array.isArray(shop.products)
-? shop.products
-: [];
-
-products.forEach(function(product){
-
-rows += `
-<tr>
-
-<td>
-<strong>
-${escapeHtml(
-product.name || "-"
-)}
-</strong>
-</td>
-
-<td>
-${escapeHtml(
-shop.shopName || "-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-product.category || "Other"
-)}
-</td>
-
-<td>
-₹${escapeHtml(
-product.price ?? "-"
-)}
-</td>
-
-<td>
-${escapeHtml(
-product.unit || "Piece"
-)}
-</td>
-
-</tr>
-`;
-
-});
-
-});
-  if(!rows){
-
-table.innerHTML =
-`<tr>
-<td colspan="5" class="loading">
-Abhi koi product available nahi hai.
-</td>
-</tr>`;
-
-return;
-
-}
-
-table.innerHTML = rows;
+    alert(
+        plan +
+        " plan management feature abhi interface mein ready hai."
+    );
 
 }
 
 
-/* PLAN MESSAGE */
+/* PAGE LOAD */
 
-function planMessage(plan){
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
 
-alert(
-plan +
-" plan management next step mein connect karenge."
+        loadShops();
+
+    }
 );
 
-}
+
+/* ESC KEY SE MODAL CLOSE */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            closeShopModal();
+
+            closeEditShop();
+
+        }
+
+    }
+);
 
 
-/* HTML SAFETY */
+/* FINAL ERROR HANDLER */
 
-function escapeHtml(value){
+window.addEventListener(
+    "unhandledrejection",
+    function(event){
 
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+        console.error(
+            "Unhandled error:",
+            event.reason
+        );
 
-}
-
-
-/* START */
-
-loadShops();
+    }
+);
 
 </script>
 
