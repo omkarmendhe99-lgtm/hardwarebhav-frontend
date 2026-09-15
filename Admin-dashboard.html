@@ -1000,50 +1000,75 @@ function renderShops(shops){
             "Free";
 
 
-        const active =
-            shop.active !== false;
+        
+      const approvalStatus =
+    shop.approvalStatus || "approved";
 
+const active =
+    shop.active !== false;
 
-        const status =
-            active
+let status = "";
+let actionButton = "";
 
-            ? `
-                <span
-                    class="status status-active">
-                    ✅ Active
-                </span>
-              `
+if (approvalStatus === "pending") {
 
-            : `
-                <span
-                    class="status status-disabled">
-                    🚫 Disabled
-                </span>
-              `;
+    status = `
+        <span
+            class="status"
+            style="background:#fef3c7;color:#92400e;">
+            🟠 Pending
+        </span>
+    `;
 
+    actionButton = `
+        <button
+            class="action-btn"
+            style="background:#dcfce7;color:#15803d;"
+            onclick="approveShop('${shop._id}')">
 
-        const actionButton =
-            active
+            ✅ Approve
 
-            ? `
-                <button
-                    class="action-btn disable-btn"
-                    onclick="disableShop('${shop._id}')">
+        </button>
+    `;
 
-                    🚫 Disable
+} else if (!active) {
 
-                </button>
-              `
+    status = `
+        <span
+            class="status status-disabled">
+            🚫 Disabled
+        </span>
+    `;
 
-            : `
-                <button
-                    class="action-btn enable-btn"
-                    onclick="enableShop('${shop._id}')">
+    actionButton = `
+        <button
+            class="action-btn enable-btn"
+            onclick="enableShop('${shop._id}')">
 
-                    ✅ Enable
+            ✅ Enable
 
-                </button>
-              `;
+        </button>
+    `;
+
+} else {
+
+    status = `
+        <span
+            class="status status-active">
+            ✅ Active
+        </span>
+    `;
+
+    actionButton = `
+        <button
+            class="action-btn disable-btn"
+            onclick="disableShop('${shop._id}')">
+
+            🚫 Disable
+
+        </button>
+    `;
+}
 
 
         const row =
@@ -1254,7 +1279,64 @@ function filterShops(){
     renderShops(filtered);
 
 }
+/* APPROVE SHOP */
 
+async function approveShop(id){
+
+    const ok = confirm(
+        "Kya aap is shop ko approve karna chahte hain?"
+    );
+
+    if(!ok){
+        return;
+    }
+
+    try{
+
+        const response = await fetch(
+            API + "/api/shops/" + id,
+            {
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    approvalStatus: "approved",
+                    active: true
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok){
+            throw new Error(
+                data.message ||
+                "Shop approve nahi hui."
+            );
+        }
+
+        alert(
+            "✅ Shop successfully approved."
+        );
+
+        await loadShops();
+
+    }catch(error){
+
+        console.error(
+            "APPROVE ERROR:",
+            error
+        );
+
+        alert(
+            "❌ Approval failed: " +
+            error.message
+        );
+    }
+}
 
 /* DISABLE SHOP */
 
