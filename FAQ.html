@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    FAQ - HardwareBhav.in
+</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    background:#f5f7f9;
+    color:#20252b;
+    line-height:1.7;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#fff;
+    padding:18px 25px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#20252b;
+}
+
+.logo span{
+    color:#078b67;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    max-width:950px;
+    margin:35px auto;
+    padding:0 20px;
+}
+
+.card{
+    background:#fff;
+    padding:32px;
+    border-radius:14px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+
+h1{
+    margin-top:0;
+    color:#078b67;
+    font-size:32px;
+}
+
+.intro{
+    font-size:16px;
+    color:#555;
+}
+
+
+/* =========================
+   FAQ
+========================= */
+
+.faq{
+    margin-top:25px;
+}
+
+.faq-item{
+    border:1px solid #e1e5e7;
+    border-radius:10px;
+    margin-bottom:12px;
+    overflow:hidden;
+}
+
+.faq-question{
+    width:100%;
+    padding:16px 18px;
+    background:#fff;
+    border:0;
+    text-align:left;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    color:#20252b;
+}
+
+.faq-question:hover{
+    background:#f1f8f5;
+}
+
+.faq-answer{
+    display:none;
+    padding:0 18px 17px;
+    color:#555;
+}
+
+.faq-item.active .faq-answer{
+    display:block;
+}
+
+.faq-item.active .faq-question{
+    color:#078b67;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+    background:#20252b;
+    color:#fff;
+    text-align:center;
+    padding:25px 15px;
+}
+
+footer a{
+    color:#fff;
+    text-decoration:none;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    header{
+        padding:15px;
+        text-align:center;
+    }
+
+    .logo{
+        font-size:23px;
+    }
+
+    .container{
+        margin:20px auto;
+        padding:0 12px;
+    }
+
+    .card{
+        padding:22px 17px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    .intro{
+        font-size:14px;
+    }
+
+    .faq-question{
+        font-size:15px;
+        padding:15px;
+    }
+
+    .faq-answer{
+        font-size:14px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        Hardware<span>Bhav.in</span>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="container">
+
+<div class="card">
+
+<h1>
+    Frequently Asked Questions
+</h1>
+
+<p class="intro">
+    Find answers to common questions about
+    HardwareBhav.in, hardware shops and
+    product price information.
+</p>
+
+
+<div class="faq">
+
+
+<!-- FAQ 1 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    What is HardwareBhav.in?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    HardwareBhav.in is an online platform
+    designed to help customers discover
+    hardware shops and compare available
+    product information and prices.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ 2 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    Can I find hardware shops near me?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    You can explore participating hardware
+    shops available on HardwareBhav.in.
+    Shop availability depends on the shops
+    registered and approved on the platform.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ 3 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    Are the prices shown on the website final?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    Prices displayed on HardwareBhav.in may
+    change. Customers should confirm the
+    current price and product availability
+    directly with the respective shop before
+    purchasing.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ 4 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    How can a hardware shop register?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    Hardware shop owners can use the
+    "Register Your Shop" option on the
+    website and submit the required
+    information.
+</p>
+
+</div>
+
+</div>
+
+  <!-- =========================
+     FAQ CONTINUED
+========================= -->
+
+
+<!-- FAQ 5 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    How does shop approval work?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    After a shop owner registers, the shop may
+    remain pending until it is reviewed and
+    approved by the HardwareBhav.in
+    administration.
+</p>
+
+<p>
+    Once approved, the shop and its available
+    products can be displayed to customers.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ 6 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    Can shop owners add their products?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    Yes. Approved shop owners can use their
+    shop dashboard to add and manage their
+    available products and prices.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ 7 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    Can I contact a hardware shop directly?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    Where contact information is provided by
+    a participating shop, customers can use
+    the available contact details to communicate
+    with the shop directly.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ 8 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    What should I do if a price is incorrect?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    Product prices may change or may contain
+    outdated information. Customers should
+    verify the current price with the respective
+    shop.
+</p>
+
+<p>
+    You can also contact HardwareBhav.in
+    regarding an issue or incorrect information.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ 9 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    Is registration required to browse shops?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    Basic browsing of available shops and
+    products may be possible without creating
+    an account. Certain features may require
+    registration or login.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- FAQ 10 -->
+
+<div class="faq-item">
+
+<button
+    class="faq-question"
+    onclick="toggleFAQ(this)"
+>
+    How can I contact HardwareBhav.in?
+</button>
+
+<div class="faq-answer">
+
+<p>
+    For enquiries or assistance, contact:
+</p>
+
+<p>
+    <strong>
+        Aditya Enterprises Pvt. Ltd.
+    </strong>
+    <br>
+    Mobile:
+    <strong>
+        7620716478
+    </strong>
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     FAQ JAVASCRIPT
+========================= -->
+
+<script>
+
+function toggleFAQ(button){
+
+    const item =
+        button.parentElement;
+
+    item.classList.toggle("active");
+
+}
+
+</script>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<p>
+    <strong>HardwareBhav.in</strong>
+</p>
+
+<p>
+    Compare hardware prices.
+    Find the best deal.
+</p>
+
+<p>
+    Operated by
+    <strong>Aditya Enterprises Pvt. Ltd.</strong>
+</p>
+
+<p>
+    Contact:
+    <strong>7620716478</strong>
+</p>
+
+<p>
+
+    <a href="index.html">
+        Home
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="About.html">
+        About Us
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="Contact.html">
+        Contact Us
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="Legal.html#privacy">
+        Privacy Policy
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="Legal.html#terms">
+        Terms & Conditions
+    </a>
+
+</p>
+
+<p>
+    © 2026 HardwareBhav.in
+</p>
+
+</footer>
+
+
+</body>
+
+</html>
