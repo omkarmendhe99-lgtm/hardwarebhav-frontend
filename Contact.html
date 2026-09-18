@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Contact Us - HardwareBhav.in
+</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    margin:0;
+    background:#f5f7f9;
+    color:#20252b;
+    line-height:1.7;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    background:#fff;
+    padding:18px 25px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:27px;
+    font-weight:bold;
+    color:#20252b;
+}
+
+.logo span{
+    color:#078b67;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    max-width:950px;
+    margin:35px auto;
+    padding:0 20px;
+}
+
+.card{
+    background:#fff;
+    padding:32px;
+    border-radius:14px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+
+h1{
+    margin-top:0;
+    color:#078b67;
+    font-size:32px;
+}
+
+h2{
+    margin-top:30px;
+    color:#20252b;
+    border-bottom:1px solid #eee;
+    padding-bottom:8px;
+}
+
+p{
+    margin:12px 0;
+}
+
+
+/* =========================
+   CONTACT BOX
+========================= */
+
+.contact-box{
+    background:#eef8f4;
+    border-left:4px solid #078b67;
+    padding:18px;
+    border-radius:10px;
+    margin:22px 0;
+}
+
+.contact-item{
+    margin:15px 0;
+}
+
+.contact-item strong{
+    display:block;
+    margin-bottom:3px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn-row{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.btn{
+    display:inline-block;
+    padding:11px 18px;
+    border-radius:9px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.call-btn{
+    background:#078b67;
+    color:#fff;
+}
+
+.whatsapp-btn{
+    background:#25D366;
+    color:#fff;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    header{
+        padding:15px;
+        text-align:center;
+    }
+
+    .logo{
+        font-size:23px;
+    }
+
+    .container{
+        margin:20px auto;
+        padding:0 12px;
+    }
+
+    .card{
+        padding:22px 18px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    h2{
+        font-size:21px;
+    }
+
+    body{
+        font-size:14px;
+    }
+
+    .btn-row{
+        flex-direction:column;
+    }
+
+    .btn{
+        text-align:center;
+        width:100%;
+    }
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+    background:#20252b;
+    color:#fff;
+    text-align:center;
+    padding:25px 15px;
+}
+
+footer a{
+    color:#fff;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        Hardware<span>Bhav.in</span>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="container">
+
+<div class="card">
+
+<h1>
+    Contact Us
+</h1>
+
+<p>
+    Have a question, suggestion or business
+    enquiry? We would be happy to hear from you.
+</p>
+
+
+<div class="contact-box">
+
+
+<div class="contact-item">
+
+<strong>
+    🏢 Company
+</strong>
+
+Aditya Enterprises Pvt. Ltd.
+
+</div>
+
+
+<div class="contact-item">
+
+<strong>
+    📞 Mobile
+</strong>
+
+7620716478
+
+</div>
+
+
+<div class="contact-item">
+
+<strong>
+    🌐 Website
+</strong>
+
+HardwareBhav.in
+
+</div>
+
+
+</div>
+
+
+<h2>
+    Get In Touch
+</h2>
+
+<p>
+    For general enquiries, shop registration
+    assistance or other questions related to
+    HardwareBhav.in, you can contact us using
+    the options below.
+</p>
+
+
+<div class="btn-row">
+
+<a
+    class="btn call-btn"
+    href="tel:7620716478"
+>
+    📞 Call Us
+</a>
+
+
+<a
+    class="btn whatsapp-btn"
+    href="https://wa.me/917620716478"
+    target="_blank"
+>
+    💬 WhatsApp Us
+</a>
+
+</div>
+
+
+<h2>
+    Send Us a Message
+</h2>
+
+<p>
+    You can use the form below to send us
+    your enquiry or feedback.
+</p>
+
+
+<form
+    onsubmit="sendMessage(event)"
+>
+
+
+<label>
+    Your Name
+</label>
+
+<input
+    type="text"
+    id="name"
+    placeholder="Enter your name"
+    required
+>
+
+
+<label>
+    Mobile Number
+</label>
+
+<input
+    type="tel"
+    id="mobile"
+    placeholder="Enter your mobile number"
+    required
+>
+
+
+<label>
+    Message
+</label>
+
+<textarea
+    id="message"
+    rows="5"
+    placeholder="Write your message here..."
+    required
+></textarea>
+
+
+<button
+    type="submit"
+    class="btn call-btn"
+>
+    Send Enquiry
+</button>
+
+</form>
+
+
+<style>
+
+form{
+    margin-top:20px;
+}
+
+form label{
+    display:block;
+    font-weight:bold;
+    margin-top:15px;
+    margin-bottom:6px;
+}
+
+form input,
+form textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #d5dadd;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+form input:focus,
+form textarea:focus{
+    border-color:#078b67;
+}
+
+form textarea{
+    resize:vertical;
+}
+
+form button{
+    border:none;
+    cursor:pointer;
+    margin-top:18px;
+    width:100%;
+}
+
+</style>
+
+
+<script>
+
+function sendMessage(event){
+
+    event.preventDefault();
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const mobile =
+        document.getElementById("mobile").value.trim();
+
+    const message =
+        document.getElementById("message").value.trim();
+
+
+    const whatsappNumber =
+        "917620716478";
+
+
+    const text =
+        "Hello HardwareBhav.in,%0A%0A" +
+        "Name: " + encodeURIComponent(name) +
+        "%0A" +
+        "Mobile: " + encodeURIComponent(mobile) +
+        "%0A" +
+        "Message: " + encodeURIComponent(message);
+
+
+    window.open(
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        text,
+        "_blank"
+    );
+
+}
+
+</script>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<p>
+    <strong>HardwareBhav.in</strong>
+</p>
+
+<p>
+    Compare hardware prices.
+    Find the best deal.
+</p>
+
+<p>
+    Operated by
+    <strong>Aditya Enterprises Pvt. Ltd.</strong>
+</p>
+
+<p>
+    Contact:
+    <strong>7620716478</strong>
+</p>
+
+<p>
+
+    <a href="index.html">
+        Home
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="About.html">
+        About Us
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="Legal.html#privacy">
+        Privacy Policy
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="Legal.html#terms">
+        Terms & Conditions
+    </a>
+
+    &nbsp; | &nbsp;
+
+    <a href="Legal.html#disclaimer">
+        Disclaimer
+    </a>
+
+</p>
+
+<p>
+    © 2026 HardwareBhav.in
+</p>
+
+</footer>
+
+
+</body>
+
+</html>
