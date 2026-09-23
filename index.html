@@ -484,7 +484,118 @@ footer > div:last-child p{
     }
 
 }
+/* ===== PROFESSIONAL NAVBAR ===== */
 
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.main-header .logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: #111827;
+    white-space: nowrap;
+}
+
+.main-header .logo span {
+    color: #0f766e;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 9px 11px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.main-nav a:hover {
+    background: #f0fdfa;
+    color: #0f766e;
+}
+
+.main-nav .login-btn {
+    background: #0f766e;
+    color: white;
+}
+
+.main-nav .login-btn:hover {
+    background: #115e59;
+    color: white;
+}
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    color: #111827;
+}
+
+/* Mobile */
+@media (max-width: 850px) {
+
+    .nav-container {
+        padding: 11px 15px;
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px 15px 15px;
+        border-bottom: 1px solid #e5e7eb;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .main-nav a {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+    }
+
+    .main-nav .login-btn {
+        text-align: center;
+    }
+        }
 </style>
 
 </head>
@@ -496,34 +607,36 @@ footer > div:last-child p{
 <!-- =========================
      HEADER
 ========================= -->
+<header class="main-header">
+    <div class="nav-container">
 
-<header>
+        <div class="logo">
+            Hardware<span>Bhav.in</span>
+        </div>
 
-    <div class="logo">
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
+            ☰
+        </button>
 
-        Hardware<span>Bhav.in</span>
+        <nav id="mainNav" class="main-nav">
+
+            <a href="index.html">🏠 Home</a>
+
+            <a href="#products">🔎 Find Shops</a>
+
+            <a href="Shop-register.html">🏪 Register Shop</a>
+
+            <a href="FAQ.html">❓ FAQ</a>
+
+            <a href="About.html">ℹ️ About</a>
+
+            <a href="Contact.html">📞 Contact</a>
+
+            <a href="Shop-login.html" class="login-btn">🔐 Shop Login</a>
+
+        </nav>
 
     </div>
-
-<div style="display:flex;gap:8px;align-items:center;">
-
-    <button
-        class="header-btn"
-        onclick="shopLogin()"
-    >
-        🔐 Shop Login
-    </button>
-
-    <button
-        class="header-btn"
-        onclick="registerShop()"
-    >
-        🏪 Register Shop
-    </button>
-
-</div>
-    
-
 </header>
 
 
@@ -2002,6 +2115,8 @@ function shopLogin(){
     window.location.href =
         "Shop-login.html";
     }
+
+    
 /* =========================
    REGISTER SHOP
 ========================= */
