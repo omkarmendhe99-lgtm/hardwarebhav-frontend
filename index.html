@@ -622,7 +622,7 @@ footer > div:last-child p{
 
             <a href="index.html">🏠 Home</a>
 
-            <a href="#products">🔎 Find Shops</a>
+            <a href="#productsContainer">🔎 Find Shops</a>
 
             <a href="Shop-register.html">🏪 Register Shop</a>
 
@@ -2105,6 +2105,15 @@ function escapeHTML(value){
         );
 
 }
+/* =========================
+   MENU
+========================= */
+
+function toggleMenu() {
+    const nav = document.getElementById("mainNav");
+    nav.classList.toggle("active");
+}
+
 
 /* =========================
    SHOP LOGIN
@@ -2114,7 +2123,7 @@ function shopLogin(){
 
     window.location.href =
         "Shop-login.html";
-    }
+        }
 
     
 /* =========================
