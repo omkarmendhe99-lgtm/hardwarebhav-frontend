@@ -1929,7 +1929,18 @@ document
         "click",
         openShopEdit
     );
+document
+    .getElementById("profileButton")
+    .addEventListener(
+        "click",
+        function(){
 
+            document.getElementById(
+                "profileModal"
+            ).style.display = "flex";
+
+        }
+    );
 
 document
     .getElementById("saveShopButton")
