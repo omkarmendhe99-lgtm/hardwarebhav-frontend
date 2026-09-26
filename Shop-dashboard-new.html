@@ -224,6 +224,36 @@ th{
 .modal-content h2{
     margin-bottom:15px;
 }
+    .profile-close-btn{
+    position:absolute;
+    top:12px;
+    right:14px;
+
+    width:36px;
+    height:36px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#f1f5f9;
+    color:#334155;
+
+    font-size:20px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:0.2s ease;
+}
+
+.profile-close-btn:hover{
+    background:#e2e8f0;
+    color:#111827;
+}
 
 .form-group{
     margin-bottom:12px;
@@ -733,6 +763,14 @@ th{
         <h2>
             👤 My Shop Profile
         </h2>
+        <button
+    type="button"
+    id="closeProfileButton"
+    class="profile-close-btn"
+    aria-label="Close Profile"
+>
+    ✕
+        </button>
 
         <div class="form-group">
 
@@ -2036,6 +2074,18 @@ document
             document.getElementById(
                 "profileModal"
             ).style.display = "flex";
+
+        }
+    );
+      document
+    .getElementById("cancelProfileButton")
+    .addEventListener(
+        "click",
+        function(){
+
+            document.getElementById(
+                "profileModal"
+            ).style.display = "none";
 
         }
     );
