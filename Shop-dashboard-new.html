@@ -367,7 +367,13 @@ th{
                 >
                     ✏️ Edit Shop
                 </button>
-
+                 <button
+    type="button"
+    class="edit-btn"
+    id="profileButton"
+>
+    👤 My Profile
+                 </button>
                 <button
                     type="button"
                     class="location-btn"
@@ -706,6 +712,126 @@ th{
             <button
                 class="cancel-btn"
                 id="cancelShopButton"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+    <!-- SHOP PROFILE MODAL -->
+
+<div
+    class="modal"
+    id="profileModal"
+>
+
+    <div class="modal-content">
+
+        <h2>
+            👤 My Shop Profile
+        </h2>
+
+        <div class="form-group">
+
+            <label>
+                Shop Logo
+            </label>
+
+            <input
+                type="file"
+                id="shopLogo"
+                accept="image/*"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Shop Name
+            </label>
+
+            <input
+                type="text"
+                id="profileShopName"
+                placeholder="Enter shop name"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Owner Name
+            </label>
+
+            <input
+                type="text"
+                id="profileOwnerName"
+                placeholder="Enter owner name"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="profileEmail"
+                placeholder="Enter email"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Mobile
+            </label>
+
+            <input
+                type="text"
+                id="profileMobile"
+                placeholder="Enter mobile number"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                Shop Description
+            </label>
+
+            <textarea
+                id="profileDescription"
+                placeholder="About your shop"
+                rows="4"
+            ></textarea>
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                type="button"
+                class="save-btn"
+                id="saveProfileButton"
+            >
+                💾 Save Profile
+            </button>
+
+            <button
+                type="button"
+                class="cancel-btn"
+                id="cancelProfileButton"
             >
                 Cancel
             </button>
