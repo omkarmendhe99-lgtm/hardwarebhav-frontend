@@ -1638,7 +1638,46 @@ function openShopEdit(){
     ).style.display = "flex";
 
 }
+/* ============================= */
+/* SAVE SHOP PROFILE */
+/* ============================= */
 
+async function saveProfile(){
+
+    const shopName =
+        document.getElementById("profileShopName").value.trim();
+
+    const ownerName =
+        document.getElementById("profileOwnerName").value.trim();
+
+    const email =
+        document.getElementById("profileEmail").value.trim();
+
+    const mobile =
+        document.getElementById("profileMobile").value.trim();
+
+    const description =
+        document.getElementById("profileDescription").value.trim();
+
+
+    if(
+        !shopName ||
+        !ownerName ||
+        !email ||
+        !mobile
+    ){
+
+        alert("Please shop name, owner name, email aur mobile fill karein.");
+
+        return;
+    }
+
+
+    alert(
+        "Profile details ready hain. Permanent save next step mein backend se connect karenge."
+    );
+
+      }
 
 /* ============================= */
 /* SAVE SHOP */
@@ -1941,7 +1980,12 @@ document
 
         }
     );
-
+document
+    .getElementById("saveProfileButton")
+    .addEventListener(
+        "click",
+        saveProfile
+    );
 document
     .getElementById("saveShopButton")
     .addEventListener(
