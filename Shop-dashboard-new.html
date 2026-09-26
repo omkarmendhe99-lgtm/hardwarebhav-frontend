@@ -1638,7 +1638,7 @@ function openShopEdit(){
     ).style.display = "flex";
 
 }
-/* ============================= */
+      /* ============================= */
 /* SAVE SHOP PROFILE */
 /* ============================= */
 
@@ -1660,25 +1660,84 @@ async function saveProfile(){
         document.getElementById("profileDescription").value.trim();
 
 
-    if(
-        !shopName ||
-        !ownerName ||
-        !email ||
-        !mobile
-    ){
+    if(!shopName || !ownerName || !email || !mobile){
 
-        alert("Please shop name, owner name, email aur mobile fill karein.");
+        alert(
+            "Please shop name, owner name, email aur mobile fill karein."
+        );
 
         return;
     }
 
 
-    alert(
-        "Profile details ready hain. Permanent save next step mein backend se connect karenge."
-    );
+    try{
+
+        const response =
+            await fetch(
+                API + "/api/shops/" + SHOP_ID,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        shopName: shopName,
+
+                        ownerName: ownerName,
+
+                        description: description,
+
+                        shopLogo: ""
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!response.ok || data.success === false){
+
+            throw new Error(
+                data.message ||
+                "Profile update failed."
+            );
+        }
+
+
+        alert(
+            "✅ Shop profile successfully save ho gayi!"
+        );
+
+
+        document.getElementById(
+            "profileModal"
+        ).style.display = "none";
+
+
+        await loadShop();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "PROFILE SAVE ERROR:",
+            error
+        );
+
+        alert(
+            "❌ Profile save nahi hui.\n\n" +
+            error.message
+        );
+    }
 
       }
-
 /* ============================= */
 /* SAVE SHOP */
 /* ============================= */
